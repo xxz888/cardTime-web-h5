@@ -1,0 +1,339 @@
+<template>
+  <div style="background: #fff;">
+    <van-nav-bar class="agent_nav theme_bg" style="background: none;" :border='false' :title="title" left-arrow
+                 @click-left="onClickLeft">
+    </van-nav-bar>
+    <div class="warpper_top"></div>
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh" loading-text="加载中...">
+      <div>
+        <div class="profit_type_top theme_bg">
+          <ul>
+            <li class="item">
+              <div class="left">
+                <div class="title"><span v-if='queryType==8'>提现总金额</span><span
+                  v-else-if='queryType==7'>弥补总额度</span><span v-else-if='queryType==4'>达标总奖励</span>（元）
+                </div>
+                <div class="amount">{{ order.totalAmount |toFixed }}</div>
+              </div>
+              <div class="right"></div>
+            </li>
+            <li class="item">
+              <div class="left">
+                <div class="title"><span v-if='queryType==8'>当日提现</span><span
+                  v-else-if='queryType==7'>当日弥补额度</span><span v-else-if='queryType==4'>当日收益</span>（元）
+                </div>
+                <div class="profit_amount">{{ order.todayAmount |toFixed }}</div>
+              </div>
+              <div class="right">
+                <div class="title"><span v-if='queryType==8'>当月提现</span><span
+                  v-else-if='queryType==7'>当月弥补额度</span><span v-else-if='queryType==4'>当月收益</span>（元）
+                </div>
+                <div class="profit_amount">{{ order.monthAmount |toFixed }}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="profit_share_cont">
+          <div class="profit_type_top">
+            <div class="profit_type_detail_top_bg" v-if="queryType==4">
+              <div>日期</div>
+              <div>姓名</div>
+              <div>金额（元）</div>
+            </div>
+            <div class="profit_type_record" v-else>
+              <div>当日<span v-if='queryType==8'>提现</span><span v-else-if='queryType==7'>弥补</span>(笔):<span class="theme">{{
+                  order.todayCount
+                }}</span>
+              </div>
+              <div>当月<span v-if='queryType==8'>提现</span><span v-else-if='queryType==7'>弥补</span>(笔):<span class="theme">{{
+                  order.monthCount
+                }}</span>
+              </div>
+            </div>
+          </div>
+          <ul class="profit_type_date" v-if="order.detail.length>0 && queryType==4 ">
+            <li class="item van-hairline--bottom" v-for="(item,index) in order.detail" :key="index">
+              <div class="type">{{ item.tradeTime.split('-')[1] + '/' + item.tradeTime.split('-')[2] }}</div>
+              <div>{{ item.userName }}</div>
+              <div class="active">{{ item.tradeAmount |toFixed }}</div>
+            </li>
+          </ul>
+          <ul class="profit_type_date" v-else-if="order.detail.length>0 && queryType!=4 ">
+            <li class=" van-hairline--bottom">
+              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/title_icon.png" alt="">
+              <span class="theme"><span v-if='queryType==8'>提现</span><span v-else-if='queryType==7'>弥补</span>历史记录</span>
+            </li>
+            <li class="record van-hairline--bottom" v-for="(item,index) in order.detail" :key="index">
+              <div>
+                <div><span v-if='queryType==8'>提现</span><span v-else-if='queryType==7'>弥补</span>金额</div>
+                <p>{{ item.tradeTime }}</p>
+              </div>
+              <div>
+                <span>{{ item.tradeAmount |toFixed }}</span>
+                <!-- <p class="status">{{item.status| withdrawal}}</p> -->
+              </div>
+            </li>
+          </ul>
+          <van-empty class="user_empty" v-else
+                     image="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/profit_empty.png"
+                     description="还没有记录,请前去立即推广哦">
+            <van-button round @click="next('/sharePage','8')" class="bottom-button theme-linear-bg color_fff ">
+              立即推广
+            </van-button>
+          </van-empty>
+        </div>
+      </div>
+    </van-pull-refresh>
+  </div>
+</template>
+
+<script>
+import {
+  NavBar,
+  PullRefresh,
+  Icon,
+  DropdownMenu,
+  DropdownItem,
+  empty,
+  Button
+} from 'vant';
+import {
+  orderDetailQuery
+} from "@/api/profit";
+
+export default {
+  data() {
+    return {
+      brandId: localStorage.getItem('brandId'),
+      userId: localStorage.getItem('userId'),
+      phone: localStorage.getItem('phone'),
+      isLoading: false,
+      fuwuList: [],
+      queryType: 4, //1:快捷,2:余额还款,3:空卡还款,6:花呗
+      title: "达标奖励",
+      order: {
+        detail: [],
+        monthAmount: 0,
+        monthCount: 0,
+        todayAmount: 0,
+        todayCount: 0,
+        totalAmount: 0,
+      }
+    };
+  },
+  components: {
+    [NavBar.name]: NavBar,
+    [PullRefresh.name]: PullRefresh,
+    [Icon.name]: Icon,
+    [DropdownMenu.name]: DropdownMenu,
+    [DropdownItem.name]: DropdownItem,
+    [empty.name]: empty,
+    [Button.name]: Button
+  },
+  computed: {},
+  created() {
+    this.title = JSON.parse(this.$route.params.title)
+    this.queryType = JSON.parse(this.$route.params.level)
+    this._orderDetailQuery()
+  },
+  methods: {
+    onClickLeft() {
+      this.publicJs.back();
+    },
+    dateChange() {
+      this._orderDetailQuery()
+    },
+    _orderDetailQuery() {
+      orderDetailQuery(this.queryType, 20).then(res => {
+        if (res.resp_code == '000000') {
+          this.order = res.result
+        }
+      })
+    },
+    next(name, level, type, title) {
+      this.$router.push({path: name});
+    },
+    // 下拉刷新
+    onRefresh() {
+      setTimeout(() => {
+        this.$toast('刷新成功');
+        this.isLoading = false;
+      }, 1000);
+    },
+  }
+}
+</script>
+<style scoped>
+.agent_nav >>> .van-nav-bar__title.van-ellipsis {
+  color: #fff;
+}
+
+.agent_nav >>> .van-icon {
+  color: #FFFFFF !important;
+}
+
+
+.profit_type_detail_top_bg {
+  background: #fff;
+  padding: 3px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.09);
+  display: flex;
+  font-size: 14px;
+  /* margin-bottom: 20px; */
+}
+
+.profit_type_detail_top_bg div {
+  flex: 1;
+  text-align: center;
+  color: #666;
+  padding: 10px 0;
+}
+
+.profit_type_record {
+  background: #fff;
+  padding: 3px 15px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.09);
+  display: flex;
+  font-size: 14px;
+}
+
+.profit_type_record div {
+  flex: 1;
+  color: #666;
+  padding: 10px 0;
+}
+
+.profit_type_top {
+  width: 100%;
+  padding: 10px 0 25px 0;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 0 0 20px 20px;
+}
+
+.profit_type_top .item {
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.profit_type_top .item > div {
+  flex: 1;
+  text-align: center;
+}
+
+.profit_type_top .item .title {
+  font-size: 13px;
+  line-height: 30px;
+  font-weight: 300;
+
+}
+
+.profit_type_top .item .amount {
+  font-size: 32px;
+}
+
+.profit_type_top .item .profit_amount {
+  font-size: 20px;
+}
+
+.profit_type_top .item .right {
+  position: relative;
+}
+
+.profit_share_cont {
+  padding: 0 10px;
+  margin-top: -30px;
+}
+
+.profit_type_date {
+  font-size: 14px;
+  color: #333;
+  padding-bottom: 20px;
+}
+
+.profit_type_date .item {
+  display: flex;
+  height: 44px;
+  text-align: center;
+}
+
+.profit_type_date .item .right {
+  width: 40px;
+  color: #666;
+  font-size: 15px;
+  line-height: 44px;
+}
+
+.profit_type_date .item div {
+  flex: 1;
+}
+
+.active {
+  color: #F63802;
+}
+
+.profit_type_date .type {
+  font-size: 12px;
+  color: #666;
+}
+
+.user_empty >>> .van-empty__image img {
+  height: auto;
+}
+
+.profit_type_date .record {
+  display: flex;
+  padding: 10px 15px;
+  font-size: 13px;
+}
+
+/* .profit_type_date li:nth-child(1){
+    line-height: 44px;
+    font-size: 14px;
+    padding: 0 15px;
+} */
+
+
+.profit_type_date li:nth-child(1) img {
+  height: 11px;
+  width: 18px;
+  margin-right: 5px;
+}
+
+.profit_type_date .record div {
+  flex: 1;
+  position: relative;
+}
+
+.profit_type_date .record p {
+  font-size: 12px;
+  color: #999;
+  padding-top: 10px;
+}
+
+.profit_type_date .record span {
+  font-size: 18px;
+  color: #F63802;
+  position: absolute;
+  height: 25px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  display: inline-block;
+}
+
+.status {
+  color: #F63802 !important;
+  font-size: 12px !important;
+  position: absolute;
+  height: 25px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: 20px;
+  display: inline-block;
+}
+</style>
