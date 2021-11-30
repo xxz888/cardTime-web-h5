@@ -12,8 +12,8 @@ import {router} from '../router';
 // let ip = "https://api.flyaworld.com/v1.0"
 // let ip = "https://caderapi.caderworld.com/v1.0"
 // let ip = 'http://139.196.145.125/v1.0'
-// let ip = "https://api.flyaworld.com/v1.0"
-let ip = "http://103.113.158.61:18080/v1.0"
+let ip = "https://api.flyaworld.com/v1.0"
+// let ip = "http://103.113.158.61:18080/v1.0"
 
 
 export function getIp(){
@@ -140,12 +140,12 @@ service.interceptors.response.use(
           Notify('请求出现了404！请稍后重试！');
           break;
         case 401:
-          Dialog.alert({
-            title: "温馨提示",
-            message: '您的登录已过期，可以取消继续留在该页面，或者重新登录'
-          }).then(() => {
-            router.push({name: 'login'});
-          });
+          // Dialog.alert({
+          //   title: "温馨提示",
+          //   message: '您的登录已过期，可以取消继续留在该页面，或者重新登录'
+          // }).then(() => {
+          //   router.push({name: 'login'});
+          // });
           break;
         default:
           error.message = `连接出错(${error.response.status})!`;

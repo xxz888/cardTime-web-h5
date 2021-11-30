@@ -1,27 +1,27 @@
 <template>
   <div class="login">
     <div class="top">
-      <!-- <img class="login_logo" src="@/assets/login/login_logo.png" alt=""> -->
+      <img class="login_logo" src="@/assets/logo1.png" alt="">
       <p>心有多大 舞台就有多大</p>
     </div>
     <div class="cont">
       <ul class="list">
-        <li class="item theme_border_b">
+        <li class="item">
           <div class="switchover">
             <span :class="active ? 'active' : 'noactive'" @click="active = !active">注册账号</span>
             <span :class="!active ? 'active' : 'noactive'" @click="active = !active">密码登录</span>
           </div>
 
           <div class="input">
-            <div class="right">
+            <div class="bgInputDiv">
               <van-field v-model="phone" type="number" clearable placeholder="请输入手机号" maxlength="11"/>
             </div>
           </div>
         </li>
 
         <li class="item " v-show="active">
-          <div class="input theme_border_b">
-            <div class="">
+          <div class="input ">
+            <div class="bgInputDiv">
               <van-field v-model="smsCode" clearable type="number" placeholder="请输入短信验证码" maxlength="6">
                 <template #button>
                   <div class="sms" @click="message == '发送验证码' ? getCode() : ''">
@@ -32,15 +32,15 @@
             </div>
           </div>
 
-          <div class="input theme_border_b">
-            <div class="">
+          <div class="input ">
+            <div class="bgInputDiv">
               <van-field v-model="regPwd" clearable type="password" placeholder="请输入密码，6-16位数字字母组合">
               </van-field>
             </div>
           </div>
 
-          <div class="input theme_border_b">
-            <div class="">
+          <div class="input ">
+            <div class="bgInputDiv">
               <van-field v-model="preUserPhone" clearable type="number" maxlength="11" placeholder="推荐人手机号">
               </van-field>
             </div>
@@ -49,9 +49,9 @@
 
         <!-- 密码登录 -->
         <div v-show="!active">
-          <li class="item theme_border_b">
+          <li class="item ">
             <div class="input">
-              <div class="">
+              <div class="bgInputDiv">
                 <van-field v-model="password" clearable type="password" placeholder="请输入密码">
                 </van-field>
               </div>
@@ -62,9 +62,7 @@
         <!-- 密码登录 -->
       </ul>
       <div class="btn" @click="confirm">立即登录</div>
-      <div class="login_tips" @click="pull">
-        登录即代表已同意 <span>《八色生活服务协议》</span>
-      </div>
+
     </div>
   </div>
 </template>
@@ -154,6 +152,8 @@ export default {
     },
     //登录
     confirm() {
+                  this.$router.push({name: "home"});
+return;
       if (this.publicJs.isPhoneNumber(this.phone)) {
         this.$toast({message: "手机号码有误，请重填", position: "bottom"});
         return;
@@ -214,13 +214,13 @@ export default {
 <style scoped lang='less'>
 .forget {
   margin-top: 12px;
-  color: #3AC461;
+  color: #C49A4D;
   font-size: 12px;
   text-align: right;
 }
 
 .active {
-  // border-bottom: 2px solid#3AC461;
+  // border-bottom: 2px solid#C49A4D;
   font-size: 16px;
   font-weight: 600;
   color: #333;
@@ -246,7 +246,7 @@ export default {
 }
 
 .top {
-  background: #3AC461;
+  background:url(../assets/Rectangle@2x.png) no-repeat center 0px;
   color: #fff;
   font-size: 15px;
   background-size: 100% 100%;
@@ -262,7 +262,7 @@ export default {
   width: 300px;
   border-radius: 5px;
   margin: 0px auto;
-  margin-top: -70px;
+  margin-top: -50px;
 }
 
 .cont .item > span {
@@ -286,12 +286,15 @@ export default {
   width: 100%;
   line-height: 55px;
   border-radius: 5px;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   color: #ffffff;
   text-align: center;
-  background: #3AC461;
+  background: #C49A4D;
   box-shadow: 0 0 16px 2px rgba(0, 0, 0, 0.1);
+
+
+  
 }
 
 .login_tips {
@@ -315,7 +318,13 @@ export default {
 .right {
   border-bottom: .1px solid rgba(204, 103, 10, 0);
 }
-
+.bgInputDiv{
+  width: 100%;
+border: 1px solid #ECECEC;
+opacity: 1;
+border-radius: 4px;
+background: #F7F7F7;
+}
 .switchover {
   display: flex;
   margin-bottom: 10px;
@@ -325,5 +334,7 @@ export default {
     text-align: center;
   }
 }
-
+/deep/ .van-cell{
+  background: transparent;
+}
 </style>
