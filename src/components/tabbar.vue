@@ -8,6 +8,10 @@
           <img slot="icon" slot-scope="props" :src="props.active ? iconHome.active : iconHome.normal">
         </van-tabbar-item>
         <van-tabbar-item name="news" :to="'/news'" replace>
+          <span>收益中心</span>
+          <img slot="icon" slot-scope="props" :src="props.active ? iconNews.active : iconNews.normal">
+        </van-tabbar-item>
+        <!-- <van-tabbar-item name="news" :to="'/news'" replace>
           <span>资讯</span>
           <img slot="icon" slot-scope="props" :src="props.active ? iconNews.active : iconNews.normal">
         </van-tabbar-item>
@@ -15,7 +19,7 @@
           replace>
           <span>推广</span>
           <img slot="icon" slot-scope="props" :src="props.active ? iconShare.active : iconShare.normal">
-        </van-tabbar-item>
+        </van-tabbar-item> -->
         <van-tabbar-item  name="my" :to="'/my'" replace>
           <span>我的</span>
           <img slot="icon" slot-scope="props" :src="props.active ? iconMy.active : iconMy.normal">
@@ -35,20 +39,20 @@
       return {
         active: 'home',
         iconHome: {
-          normal: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/home_normal.png',
-          active: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/home_active.png'
+          normal: require('../assets/newicon/组 7960@2x.png'), 
+          active: require('../assets/newicon/组 7965@2x.png')
         },
         iconNews: {
-          normal: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/news_normal.png',
-          active: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/news_active.png'
+            normal: require('../assets/newicon/组 7961@2x.png'), 
+          active: require('../assets/newicon/组 7964@2x.png')
         },
-        iconShare: {
-          normal: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/share_normal.png',
-          active: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/share_active.png'
-        },
+        // iconShare: {
+        //   normal: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/share_normal.png',
+        //   active: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/share_active.png'
+        // },
         iconMy: {
-          normal: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/my_normal.png',
-          active: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/my_active.png'
+         normal: require('../assets/newicon/组 7963@2x.png'), 
+          active: require('../assets/newicon/组 7962@2x.png')
         },
       };
     },
@@ -64,7 +68,7 @@
     position: fixed !important;
   }
   .van-tabbar-item--active {
-    color: #F08300;
+    color: #333333;
   }
   .flex {
         display: flex;

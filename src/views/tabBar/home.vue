@@ -16,44 +16,44 @@
         <div class="nav_box theme_bg">
           <ul class="nav_list">
             <li class="nav_item">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/nav_quick_icon.png"
+              <img src="@/assets/newicon/组 8012@2x.png"
                    @click="next('/online',8)" alt="">
-              <div class="">信用卡收款</div>
+              <div class="">在线收款</div>
             </li>
             <li class="nav_item" @click="next('/zero','1')">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/nav_zero_icon.png" alt="">
+              <img src="@/assets/newicon/组 8040@2x.png" alt="">
               <div class="">空卡还款</div>
             </li>
             <li class="nav_item" @click="next('/creditcard','1')">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/nav_creditcard_icon.png" alt="">
-              <div class="">信用卡还款</div>
+              <img src="@/assets/newicon/组 8041@2x.png" alt="">
+              <div class="">智能还款</div>
             </li>
           </ul>
         </div>
         <div class="menu_box">
           <ul class="menu_list">
-            <li class="menu_item" @click="next('/agent',8)">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/menu_agnet_icon.png" alt="">
+            <li class="menu_item menu_item1" @click="next('/agent',8)">
+              <img class="menu_item1" src="@/assets/newicon/组 7943@2x.png" alt="">
               <div class="">顶级代理</div>
             </li>
             <li class="menu_item" @click="next('/credit',8)">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/menu_rep_icon.png" alt="">
+              <img src="@/assets/newicon/组 7942@2x.png" alt="">
               <div class="">信用管理</div>
             </li>
             <li class="menu_item" @click="next('/profitHome',8)">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/menu_profit_icon.png" alt="">
-              <div class="">收益中心</div>
+              <img src="@/assets/newicon/组 7941@2x.png" alt="">
+              <div class="">在线办卡</div>
             </li>
             <li class="menu_item" @click="cardApply">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/menu_creditcard_icon.png" alt="">
-              <div class="">信用卡办卡</div>
+              <img src="@/assets/newicon/组 7944@2x.png" alt="">
+              <div class="">花呗收款</div>
             </li>
           </ul>
         </div>
         <div class="cont">
           <div class="news">
             <div class="left">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/news_icon.png" alt="">
+              <img src="@/assets/newicon/组 7937@2x.png" alt="">
             </div>
             <div class="right" @click="next('/message',8)">
               <van-notice-bar :scrollable="false" background="none" class="home_notivce">
@@ -74,16 +74,34 @@
           </div>
           <div class="activity_box">
             <div class="activity_title">
-              <span>最新活动</span>
+              <!-- <span>最新活动</span> -->
             </div>
             <div>
-              <van-swipe class="activity_bg" v-for="(image, index) in bannerListDef" :autoplay="3000"
-                         indicator-color="white" :key="index">
+              <van-swipe class="activity_bg"  :autoplay="3000"
+                         indicator-color="white" >
                 <van-swipe-item>
-                  <img :src="image.imgurl"/>
+                   <img src="@/assets/newicon/蒙版组 112@2x.png" alt="">
                 </van-swipe-item>
               </van-swipe>
             </div>
+            <div class="skip">
+            <div @click="$router.push('/sharePage')" class="skip_share">
+              <h5>分享推广</h5>
+              <p>推广越多/赚的越多</p>
+            </div>
+            <div @click="$router.push('/library')" class="skip_item">
+              <h5>一键朋友圈</h5>
+              <p>一键推广/省时省力</p>
+            </div>
+            <div @click="$router.push('/partnerBusiness')" class="skip_material">
+              <h5>推广物料</h5>
+              <p>应有尽有/丰富多彩</p>
+            </div>
+            <div @click="$router.push('/news')" class="skip_news">
+              <h5>业内动态</h5>
+              <p>了解动态/运筹帷幄</p>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -347,9 +365,9 @@ export default {
 }
 
 .nav_box {
-  height: 140px;
+  height: 150px;
   width: 100%;
-  padding: 20px 0;
+  padding: 40px 10px;
   color: #fff;
   font-size: 13px;
 }
@@ -364,15 +382,15 @@ export default {
 }
 
 .nav_item img {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .menu_box {
   padding: 33px 0;
   width: 100%;
-  border-radius: 30px 30px 0px 0px;
-  margin-top: -30px;
+  border-radius: 10px 10px 0px 0px;
+  margin-top: -20px;
   position: relative;
   z-index: 111;
   background: #fff;
@@ -394,7 +412,10 @@ export default {
   height: 34px;
   width: 34px;
 }
-
+.menu_item1 {
+  height: 44px;
+  width: 44px;
+}
 .cont {
   padding: 0 10px;
   background: #fff;
@@ -403,19 +424,19 @@ export default {
 .news {
   width: 100%;
   padding: 10px;
-  background: #F5F5F5;
+  background: #fff;
   border-radius: 10px;
   display: flex;
   font-size: 12px;
 }
 
 .news .left img {
-  height: 55px;
+  height: 16px;
   max-width: 100%;
 }
 
 .news .left {
-  width: 68px;
+  /* width: 68px; */
 }
 
 .news .right {
@@ -433,12 +454,12 @@ export default {
   top: 0;
   bottom: 0;
   margin: auto 0;
-  height: 16px;
+  height: 20px;
   color: #666;
 }
 
 .home_notivce {
-  height: 55px;
+  height: 20px;
 }
 
 .new_swipe span {
@@ -481,7 +502,47 @@ export default {
 .activity_bg img {
 
   max-width: 100%;
-
+  height: 124px;
 }
 
+.skip {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.skip div {
+  width: 49%;
+  height: 70px;
+  margin: 5px 0px;
+  font-size: 12px;
+  color: #fff;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+.skip h5 {
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.skip_share {
+  background: url('../../assets/newicon/组 7956@2x.png') no-repeat;
+  background-size: 100%;
+}
+
+.skip_item {
+  background: url('../../assets/newicon/组 7959@2x.png') no-repeat;
+  background-size: 100%;
+}
+
+.skip_material {
+  background: url('../../assets/newicon/组 7957@2x.png') no-repeat;
+  background-size: 100%;
+}
+
+.skip_news {
+  background: url('../../assets/newicon/组 7958@2x.png') no-repeat;
+  background-size: 100%;
+}
 </style>

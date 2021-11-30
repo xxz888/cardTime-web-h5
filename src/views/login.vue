@@ -71,6 +71,7 @@
 import {Field} from "vant";
 import Cookies from "js-cookie";
 import {smsSend, smsLogin, userLogin, register} from "@/api/login";
+import md5 from 'js-md5';
 
 export default {
   data() {
@@ -117,10 +118,16 @@ export default {
     },
     // 获取验证码
     getCode() {
-      smsSend(this.brandId, this.phone).then((res) => {
-        if (res.resp_code == "000000") {
-          this.time();
+        authPhone(this.phone).then(res => {
+        if (res.resp_message.indexOf('未注册') > -1) {
           this.$toast({message: res.resp_message, position: "bottom"});
+        } else if (res.resp_message.indexOf('已注册') > -1) {
+          smsSend(this.brandId, this.phone).then((res) => {
+            if (res.resp_code == "000000") {
+              this.time();
+              this.$toast({message: res.resp_message, position: "bottom"});
+            }
+          })
         }
       })
     },
@@ -152,24 +159,31 @@ export default {
     },
     //登录
     confirm() {
-                  this.$router.push({name: "home"});
-return;
       if (this.publicJs.isPhoneNumber(this.phone)) {
         this.$toast({message: "手机号码有误，请重填", position: "bottom"});
         return;
       }
       if (this.active) {
-        this.regconfirm()
-      } else {
-        if (this.password == '') {
-          this.$toast({message: "密码不能为空", position: "bottom"})
-          return
-        } else if (this.password.length < 6) {
-          this.$toast({message: "密码不能小于6位", position: "bottom"})
-          return
+        if (this.smsCode == "") {
+          this.$toast({message: "请先获取输入验证码", position: "bottom"});
+          return;
         }
-        userLogin(this.phone, this.password, this.brandId).then(res => {
+        this.$store.commit('Loading')
+        smsLogin(this.brandId, this.phone, this.smsCode).then((res) => {
+          this.$store.commit('closeLoading')
           if (res.resp_code == "000000") {
+            if (res.result.realnameStatus == 1) {  //未实名 让跳转APP
+              this.$router.replace({name: "home"});//首页
+            } else {
+              this.$toast({message: '请到卡德世界APP实名后登录', position: 'bottom'})
+              this.$store.commit('Loading')
+              let time = setTimeout(() => {
+                this.$store.commit('closeLoading')
+                this._getDownload()
+                clearTimeout(time)
+              }, 2500);
+              return
+            }
             localStorage.setItem("userId", res.result.id);
             localStorage.setItem("phone", res.result.phone);
             localStorage.setItem("token", res.result.userToken);
@@ -179,10 +193,49 @@ return;
             localStorage.setItem('brandId', res.result.brandId)
             this.deviceId();
             Cookies.set("kd_l_phone", this.phone);
-
             sessionStorage.setItem("userName", res.result.fullname);
             sessionStorage.setItem("phone", res.result.phone);
-            this.$router.push({name: "home"});
+            localStorage.setItem('realnameStatus', res.result.realnameStatus)
+          }
+        });
+      } else {
+        if (this.password == '') {
+          this.$toast({message: "密码不能为空", position: "bottom"})
+          return
+        } else if (this.password.length < 6) {
+          this.$toast({message: "密码不能小于6位", position: "bottom"})
+          return
+        }
+        this.$store.commit('Loading')
+        let str = 'brandId=' + this.brandId + '&password=' + this.password + '&phone=' + this.phone + '&key=' + 'cader#%world' //拼接
+        let sign = md5(str).toUpperCase() //MD5加密然后字母转为大写
+        userLogin(this.phone, this.password, this.brandId, sign).then(res => {
+          this.$store.commit('closeLoading')
+          if (res.resp_code == "000000") {
+            if (res.result.realnameStatus == 1) {
+              this.$router.replace({name: "home"});//首页
+            } else {
+              this.$toast({message: '请到卡德世界APP实名后登录', position: 'bottom'})
+              this.$store.commit('Loading')
+              let time = setTimeout(() => {
+                this.$store.commit('closeLoading')
+                this._getDownload()
+                clearTimeout(time)
+              }, 2500);
+              return
+            }
+            localStorage.setItem("userId", res.result.id);
+            localStorage.setItem("phone", res.result.phone);
+            localStorage.setItem("token", res.result.userToken);
+            localStorage.setItem("ip", this.global.ip);
+            localStorage.setItem("userName", res.result.fullname);
+            localStorage.setItem("loginT", true);
+            localStorage.setItem('brandId', res.result.brandId)
+            this.deviceId();
+            Cookies.set("kd_l_phone", this.phone);
+            sessionStorage.setItem("userName", res.result.fullname);
+            sessionStorage.setItem("phone", res.result.phone);
+            localStorage.setItem('realnameStatus', res.result.realnameStatus)
           }
         })
       }
