@@ -31,7 +31,7 @@
               <div>空卡记录</div>
             </li>
           </ul>
-          <van-dropdown-menu active-color="#F08300" class="menu">
+          <van-dropdown-menu active-color="#C49A4D" class="menu">
             <van-dropdown-item v-model="yaer" :options="yearList" @change="dateChange"/>
             <van-dropdown-item v-model="month" :options="monthList" @change="dateChange"/>
           </van-dropdown-menu>
@@ -540,8 +540,7 @@ export default {
 }
 
 .bill_top_bg {
-  width: 100%;
-  background: url("https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/bill/bill_top_bg.png") center no-repeat;
+background: #C49A4D;
   background-size: 100% 100%;
   height: 120px;
   color: #fff;
@@ -577,7 +576,7 @@ export default {
 }
 
 .typeActive {
-  color: #F08300 !important;
+  color: #C49A4D !important;
 }
 
 .bill_cont {

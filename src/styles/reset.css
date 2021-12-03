@@ -96,20 +96,20 @@ ul,li {
 
 }
 .theme_btn{
-  background: linear-gradient(180deg, #CCA264 0%, #AA7322 100%) !important;
+  background: linear-gradient(180deg, #CCA264 0%, #C49A4D 100%) !important;
 }
 .theme_btn_dark{
-  background: linear-gradient(180deg, #CCA264 0%, #AA7322 100%) !important;
+  background: linear-gradient(180deg, #CCA264 0%, #C49A4D 100%) !important;
 }
 .theme{
-  color: #F08300  !important;
+  color: #C49A4D  !important;
 }
 .theme_border_b{
-  border-bottom: 1px solid #F08300;
+  border-bottom: 1px solid #C49A4D;
 }
 
 .theme_color{
-  color: #ff3735  !important;
+  color: #C49A4D  !important;
 }
 .color_fff{
   color: #fff !important;

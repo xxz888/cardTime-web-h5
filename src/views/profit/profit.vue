@@ -7,7 +7,7 @@
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh" loading-text="加载中...">
       <div>
         <div class="profit_share_top theme_bg">
-          <van-dropdown-menu class="date_sel menu" active-color="#F08300" background="none">
+          <van-dropdown-menu class="date_sel menu" active-color="#C49A4D" background="none">
             <van-dropdown-item v-model="yaer" :options="yearList" @change="dateChange"/>
             <van-dropdown-item v-model="month" :options="monthList" @change="dateChange"/>
           </van-dropdown-menu>

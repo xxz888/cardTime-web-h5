@@ -18,7 +18,7 @@
           </a>
         </div>
         <div class="tips">
-          直接推荐人是使用卡德世界的直接推荐人，他可以为您提供卡德世界功能使用说明，推广引导等服务，让您可以快速学会卡德世界的使用，并在您有推广意向时，能够引导您快速获利。
+          直接推荐人是使用卡时间的直接推荐人，他可以为您提供卡时间功能使用说明，推广引导等服务。
         </div>
       </div>
       <div class="pre_bg_b"></div>
@@ -35,7 +35,7 @@ export default {
     return {
       brandId: localStorage.getItem('brandId'),
       phone: localStorage.getItem('phone'),
-      prepreUserPhone: ""
+      prepreUserPhone: "13336816566"
     }
   },
   components: {
@@ -45,7 +45,7 @@ export default {
     [Icon.name]: Icon,
   },
   created() {
-    this._preUserQuery()
+    // this._preUserQuery()
   },
   methods: {
     onClickLeft() {

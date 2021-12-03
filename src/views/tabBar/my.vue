@@ -9,23 +9,23 @@
             <div class="logo">
               <input type='file' accept="image/*" @change="handleFile" class="hiddenInput"/>
               <img class='appLogo' v-if="userAvatar == '' || userAvatar == undefined"
-                   src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/logo.png" alt=""
+                   src="@/assets/logo3.png" alt=""
                    @click="uploadHeadImg"/>
               <img class='appLogo' v-if="userAvatar != '' && userAvatar != undefined" :src="userAvatar" alt=""
                    @click="uploadHeadImg"/>
             </div>
             <div class="user">
-              <div class="name">{{ user.nickname }} <span>{{ userGrade }}</span></div>
+              <!-- <div class="name">{{ user.nickname }} <span>{{ userGrade }}</span></div> -->
               <div class="phone">{{ user.phone | dataHidden }}</div>
               <div class="id">ID:{{ userId }}</div>
             </div>
-            <div class="more" @click="next('/user','8')">
+            <!-- <div class="more" @click="next('/user','8')">
               <div class="own">
                 <span>个人资料</span>
                 <van-icon class="icon_icon" size="16" name="arrow"/>
               </div>
 
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="my_cell_box">
@@ -42,7 +42,7 @@
             <li class="my_cell_item van-hairline--bottom" @click="next('/myCard','8',0)">
               <div class="left">
                 <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/my/card_icon.png" alt="">
-                <span>结算储蓄卡</span>
+                <span>银行卡管理</span>
               </div>
               <div class="icon">
                 <van-icon class="icon_icon" size="16" name="arrow"/>
@@ -96,10 +96,10 @@
               </div>
             </li>
           </ul>
-          <van-swipe class="my_branner" v-for="(image,index) in bannerListDef" :autoplay="3000"
-                     indicator-color="white" :key="index">
+          <van-swipe class="my_branner"  :autoplay="3000"
+                     indicator-color="white" >
             <van-swipe-item>
-              <img :src="image.imgurl"/>
+              <img src="../../assets/newicon/蒙版组 113@2x.png"/>
             </van-swipe-item>
           </van-swipe>
         </div>
@@ -307,7 +307,7 @@ export default {
 
 .top_bg {
   width: 100%;
-  height: 145px;
+  height: 180px;
   border-radius: 0 0 20px 20px;
 }
 
@@ -315,23 +315,23 @@ export default {
   width: 100%;
   position: relative;
   padding: 10px 10px;
-  margin-top: -40px;
+  margin-top: -80px;
 }
 
 .my_cell_list {
-  background: #fff;
+  background: #fff; 
   border-radius: 12px;
   /* padding: 10px; */
   margin-bottom: 10px;
 }
 
 .my_cell_item {
-  height: 44px;
+  height: 55px;
   display: flex;
   font-size: 14px;
-  color: #5D5D5D;
-  line-height: 44px;
-  padding: 0 15px;
+  color: #3E3E3E;
+  line-height: 55px;
+  padding: 0 20px;
 }
 
 .my_cell_item .left {
@@ -403,12 +403,23 @@ export default {
 }
 
 .my_top .user .phone {
-  font-size: 14px;
-  line-height: 28px;
+
+  font-size: 18px;
+font-family: PingFang SC;
+font-weight: bold;
+line-height: 30px;
+color: #FFFFFF;
+opacity: 1;
 }
 
 .my_top .user .id {
-  font-size: 11px;
+  margin-top: 5px;
+ font-size: 12px;
+font-family: PingFang SC;
+font-weight: 400;
+line-height: 13px;
+color: #FFFFFF;
+opacity: 0.8;
 }
 
 .my_top .more {

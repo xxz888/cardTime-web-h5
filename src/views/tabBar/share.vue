@@ -78,7 +78,7 @@
               <li class="cell_item van-hairline--bottom" @click="$router.push({name:'kadeChina'})">
                 <div class="left">
                   <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/share/join_icon.png" alt="">
-                  <span>卡德中国</span>
+                  <span>卡时间</span>
                 </div>
                 <div class="icon">
                   <van-icon class="icon_icon" size="16" name="arrow"/>

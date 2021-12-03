@@ -762,7 +762,7 @@ export default {
 .aliW {
   height: 60px;
   color: #fff;
-  background: #ff3735;
+  background: #C49A4D;
   text-align: center;
   line-height: 60px;
   font-size: 28px;

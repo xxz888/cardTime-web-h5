@@ -50,15 +50,15 @@ export default {
     },
     lineColor: {
       type: String,
-      default: '#F08300'
+      default: '#C49A4D'
     },
     // 渐变色的数组
     lineColorStops: {
       type: Array,
       default: function () {
         return [
-          { percent: 0, color: '#F08300' },
-          { percent: 1, color: '#F08300' }
+          { percent: 0, color: '#C49A4D' },
+          { percent: 1, color: '#C49A4D' }
         ]
       }
     },
@@ -72,7 +72,7 @@ export default {
     },
     fontColor: {
       type: String,
-      default: '#F08300'
+      default: '#C49A4D'
     },
     // 进度圆小球上的半径
     pointRadius: {
@@ -82,7 +82,7 @@ export default {
     // 进度圆小球上的颜色
     pointColor: {
       type: String,
-      default: '#F08300'
+      default: '#C49A4D'
     },
     // 是否启用动画
     animated: {

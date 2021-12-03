@@ -370,7 +370,7 @@ export default {
 }
 
 .noAuth {
-  background: #F08300;
+  background: #C49A4D;
   color: #ffffff;
 }
 

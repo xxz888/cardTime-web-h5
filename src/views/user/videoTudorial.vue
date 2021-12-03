@@ -4,12 +4,12 @@
     <van-nav-bar :title="'机构政策'" left-arrow fixed @click-left="onClickLeft"/>
     <div class="main">
       <img width="100%" src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/organization.jpg">
-      <van-divider dashed :style="{ borderColor: '#aaa' }"><h4>卡德世界运营服务机构政策</h4></van-divider>
+      <van-divider dashed :style="{ borderColor: '#aaa' }"><h4>卡时间运营服务机构政策</h4></van-divider>
       <ul>
         <li>1、申请成立机构需要100㎡以上的办公场地，配套基础办公设备、茶室、会议室。</li>
         <li>2、申请人具有法人资格和公司主体。</li>
-        <li>3、设立机构的目的，为当地代理商和用户提供培训服务，负责卡德世界在当地的品牌宣传，维护卡德世界在当地的市场秩序。</li>
-        <li>4、机构在享有卡德世界三级分润制度和三级奖励制度、顶级代理底薪制度和顶级团队管理奖制度的基础上，给予运营服务机构最高还款交易流水无限代万2的运营补贴。</li>
+        <li>3、设立机构的目的，为当地代理商和用户提供培训服务，负责卡时间在当地的品牌宣传，维护卡时间在当地的市场秩序。</li>
+        <li>4、机构在享有卡时间三级分润制度和三级奖励制度、顶级代理底薪制度和顶级团队管理奖制度的基础上，给予运营服务机构最高还款交易流水无限代万2的运营补贴。</li>
         <li>5、总部给予机构资源支持，拨打400电话咨询的用户和代理推荐到当地机构。</li>
         <li>6、总部为机构商组织专项培训支持，优秀机构配套行销品物料支持。</li>
       </ul>
@@ -113,7 +113,7 @@
       </div>
       <div class="erwei">
         <img width="200px" src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/erweima.jpg">
-        <p>卡德世界官方微信服务号</p>
+        <p>卡时间官方微信服务号</p>
       </div>
     </div>
   </div>

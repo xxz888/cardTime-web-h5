@@ -5,7 +5,7 @@
     <div class="shareImg">
       <img :src="canvasImg" alt="" v-if="!showImg">
       <img class="beijing" src="../../assets/share/sharePage.png" alt="" v-if="showImg">
-      <div id="qrcode" style="width: 200px;height: 240px;background-color: white;margin-top:20px" v-if="showImg"></div>
+      <div id="qrcode" style="width: 200px;height: 240px;background-color: white;margin-top:0px" v-if="showImg"></div>
       <img v-show="false" class="canvaslogo" src="../../assets/logo.png"/>
       <img v-show="false" class="toplogo" src="../../assets/logo_t.png"/>
     </div>
@@ -111,7 +111,7 @@ export default {
             cvs.fillRect(0, 0, c.width, c.height);
             let codeTemp = 6 // 二维码外部边缘宽度
             let x = 234 * bili + codeTemp //二维码的起始位置
-            let y = 955 * bili + codeTemp
+            let y = 855 * bili + codeTemp
             let imgCodeWidth = 286 * bili - codeTemp * 2 //二维码的宽
             let imgCodeHeight = 286 * bili - codeTemp * 2 //二维码的高度
             cvs.drawImage(img, 0, 0, parseInt(c.width), parseInt(c.height))
@@ -132,7 +132,7 @@ export default {
             cvs.drawImage(topSrc, topX, topY, topW, topH);
 
             let textX = c.width / 2 // 文案起始高度位置
-            let nameT = 925 * bili * ratio
+            let nameT = 825 * bili * ratio
             cvs.fillStyle = '#fff'; // 文字填充颜色
             cvs.textAlign = 'center'
             cvs.font = 14 * ratio + 'px bold sans-serif';

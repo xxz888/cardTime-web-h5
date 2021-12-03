@@ -9,7 +9,7 @@
           <h4>{{ item.channelname }}</h4>
           <i>{{ item.rate * 100 |toFixed }}%</i>
         </div>
-        <p><span style="color: #F08300;">￥{{ item.amount |toFixed }}</span></p>
+        <p><span style="color: #C49A4D;">￥{{ item.amount |toFixed }}</span></p>
         <span class="status">订单状态：{{ item.status |status }}</span>
       </div>
       <van-cell-group>

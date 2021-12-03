@@ -1,12 +1,12 @@
 <template>
   <div>
-    <van-nav-bar title="卡德中国" left-arrow @click-left="onClickLeft">
+    <van-nav-bar title="卡时间" left-arrow @click-left="onClickLeft">
     </van-nav-bar>
     <div class="china">
       <chaina></chaina>
     </div>
     <div>
-      <th>卡德中国</th>
+      <th>卡时间</th>
       <th>拟设立机构区域</th>
       <th>已设立机构区域</th>
       <chaintab :region='region'></chaintab>

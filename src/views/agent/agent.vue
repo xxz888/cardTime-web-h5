@@ -11,7 +11,7 @@
       <div>
         <div class="agent_top_bg theme_bg">
           <div class="left">
-            <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/logo.png" alt="">
+            <img src="../../assets/logo.png" alt="">
           </div>
           <div class="right">
             <span>{{ gradeName }}</span>
@@ -279,7 +279,6 @@ export default {
 .agent_top_bg .left > img {
   height: 55px;
   width: 55px;
-  border-radius: 50%;
 }
 
 .agent_top_bg .right {
@@ -375,7 +374,7 @@ export default {
 
 .agent_grade_达标代理 {
   display: inline-block;
-  background: #F08300;
+  background: #C49A4D;
   border-radius: 9px;
   padding: 0 8px;
   font-size: 11px;

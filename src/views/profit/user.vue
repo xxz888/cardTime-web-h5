@@ -311,7 +311,7 @@ export default {
 .userStatus_0, .userStatus_2, .userStatus_4 {
   border: 1px solid #ffaf78;
   background: #ffefdd;
-  color: #f08300;
+  color: #C49A4D;
 }
 
 .profit_user_item .right {
@@ -401,7 +401,7 @@ export default {
 
 .agent_grade_name {
   display: inline-block;
-  background: #F08300;
+  background: #C49A4D;
   border-radius: 9px;
   padding: 0 8px;
   font-size: 11px;
@@ -444,7 +444,7 @@ export default {
 }
 
 .activeStatus {
-  background: #F08300;
+  background: #C49A4D;
   color: #fff;
 }
 </style>

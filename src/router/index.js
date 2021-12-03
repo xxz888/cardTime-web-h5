@@ -543,7 +543,7 @@ const routes = [
     name:'kadeChina',
     component: () => import("@/views/external/kadeChina"),
     meta: {
-      title:'卡德中国'
+      title:'卡时间'
     }
   },
 
@@ -552,7 +552,7 @@ const routes = [
     name:'kadeCity',
     component: () => import("@/views/external/kadeCity"),
     meta: {
-      title:'卡德城市'
+      title:'卡时间'
     }
   },
    {
@@ -560,7 +560,7 @@ const routes = [
     name:'kadeWorld',
     component: () => import("@/views/external/kadeWorld"),
     meta: {
-      title:'卡德国际'
+      title:'卡时间'
     }
   },
   {

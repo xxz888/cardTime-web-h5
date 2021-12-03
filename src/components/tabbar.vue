@@ -1,13 +1,13 @@
 <!-- tabbar 导航栏 -->
 <template>
   <div >
-    <van-tabbar v-model="active" :safe-area-inset-bottom="true"  :route="true">
+    <van-tabbar v-model="active" :safe-area-inset-bottom="true"  :route="true" inactive-color="#C2C6C6">
       <div class="flex" :style="'width:100%' ">
         <van-tabbar-item  name="home" :to="'/home'" replace>
           <span>首页</span>
           <img slot="icon" slot-scope="props" :src="props.active ? iconHome.active : iconHome.normal">
         </van-tabbar-item>
-        <van-tabbar-item name="news" :to="'/news'" replace>
+        <van-tabbar-item name="news" :to="'/profitHome'" replace>
           <span>收益中心</span>
           <img slot="icon" slot-scope="props" :src="props.active ? iconNews.active : iconNews.normal">
         </van-tabbar-item>
@@ -46,13 +46,9 @@
             normal: require('../assets/newicon/组 7961@2x.png'), 
           active: require('../assets/newicon/组 7964@2x.png')
         },
-        // iconShare: {
-        //   normal: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/share_normal.png',
-        //   active: 'https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/tabbar/share_active.png'
-        // },
         iconMy: {
-         normal: require('../assets/newicon/组 7963@2x.png'), 
-          active: require('../assets/newicon/组 7962@2x.png')
+         normal: require('../assets/newicon/组 7962@2x.png'), 
+          active: require('../assets/newicon/组 7963@2x.png')
         },
       };
     },

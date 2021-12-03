@@ -2,7 +2,7 @@
   <div>
     <van-nav-bar :title="title" left-arrow @click-left="onClickLeft"></van-nav-bar>
     <div class="warpper">
-      <van-tabs v-model="active" animated title-active-color="#F08300" background="none" sticky line-width="22px"
+      <van-tabs v-model="active" animated title-active-color="#C49A4D" background="none" sticky line-width="22px"
                 @change="tabSwitch">
         <van-tab title="信用卡">
           <van-pull-refresh v-model="isLoading" @refresh="onRefresh" :head-height="45">
@@ -208,7 +208,7 @@ export default {
                 item.background = this.bankIconList[j].background;
                 break;
               } else {
-                item.background = "#F08300"
+                item.background = "#C49A4D"
                 item.logimg = "default"
               }
             }
@@ -228,7 +228,7 @@ export default {
                 item.background = this.bankIconList[j].background;
                 break;
               } else {
-                item.background = "#F08300"
+                item.background = "#C49A4D"
                 item.logimg = "default"
               }
             }

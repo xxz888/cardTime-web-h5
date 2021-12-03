@@ -11,7 +11,7 @@
                  src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/contact/phone_btn_online_icon.png"
                  alt="">
           </p>
-          <p class="zi">直接推荐人是使用卡德世界的直接推荐人,他可以为您提供卡德世界功能使用说明，推广引导等服务。</p>
+          <p class="zi">直接推荐人是使用卡时间的直接引导人,他可以为您提供卡时间功能使用说明，推广引导等服务。</p>
         </a>
       </div>
       <div class="item online " @click="meiqia">
@@ -23,18 +23,15 @@
           <van-tag type="warning">点击进入</van-tag>
         </p>
       </div>
-      <div class="item">
-        <a :href="'tel:'+brandPhone">
+      <div class="item" @click="copyShaneUrl()">
           <div>
-            <span class="kefu">官方客服：</span>
-            <span class="zi">(每天9:00-21:00)</span>
+            <span class="kefu">微信客服：</span>
           </div>
-          <p class="zi">电话：400-666-6085
-            <img class="tel"
+          <p class="zi">13336816566（同微信）
+            <!-- <img class="tel"
                  src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/contact/phone_btn_online_icon.png"
-                 alt="">
+                 alt=""> -->
           </p>
-        </a>
       </div>
       <div class="item">
         <div class="liu" @click="leave()">
@@ -52,8 +49,8 @@ import {preUserQuery} from "@/api/user";
 export default {
   data() {
     return {
-      prepreUserPhone: '',
-      brandPhone: '',
+      prepreUserPhone: '13336816566',
+      brandPhone: '13336816566',
       num: ''
     }
   },
@@ -65,10 +62,22 @@ export default {
   },
   created() {
     this.num = this.$route.params.num
-    this._preUserQuery()
+    // this._preUserQuery()
     this.getBrand()
   },
   methods: {
+        copyShaneUrl() {
+                    window.location.href = 'weixin://';
+
+      var input = document.createElement("input");     // 直接构建input
+      input.value = "13336816566";   // 设置内容
+      document.body.appendChild(input);        // 添加临时实例
+      input.select();      // 选择实例内容
+      document.execCommand("Copy");     // 执行复制
+      document.body.removeChild(input);  // 删除临时实例
+      this.$toast({message: '已成功复制到粘贴板', position: 'bottom'})
+      //  window.open('https://mp.weixin.qq.com/s/AqOXs-jlj8TPBTzGrXXIAw')
+    },
     meiqia() {
       _MEIQIA('init')
       _MEIQIA('showPanel')
@@ -109,11 +118,11 @@ export default {
   right: -15px;
   text-align: center;
   font-size: 11px;
-  background-color: #F08300;
+  background-color: #C49A4D;
 }
 
 .online {
-  color: #F08300;
+  color: #C49A4D;
   text-align: center;
   font-weight: 600;
   vertical-align: middle;
@@ -165,7 +174,7 @@ export default {
 }
 
 >>> .contact_nav {
-  background: linear-gradient(180deg, #F08300 0%, #F08300 100%) !important;
+  background: linear-gradient(180deg, #C49A4D 0%, #C49A4D 100%) !important;
 
 }
 

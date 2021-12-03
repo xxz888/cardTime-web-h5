@@ -613,7 +613,7 @@ export default {
 }
 
 .online_keyboard >>> .van-key--blue {
-  background: #F08300;
+  background: #C49A4D;
 }
 
 .money_input >>> .van-field__control::-webkit-input-placeholder {

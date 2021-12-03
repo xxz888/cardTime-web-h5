@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="top">
-      <img class="login_logo" src="@/assets/logo1.png" alt="">
+      <img class="login_logo" src="@/assets/logo3.png" alt="">
       <p>心有多大 舞台就有多大</p>
     </div>
     <div class="cont">
@@ -38,13 +38,13 @@
               </van-field>
             </div>
           </div>
-
+<!-- 
           <div class="input ">
             <div class="bgInputDiv">
               <van-field v-model="preUserPhone" clearable type="number" maxlength="11" placeholder="推荐人手机号">
               </van-field>
             </div>
-          </div>
+          </div> -->
         </li>
 
         <!-- 密码登录 -->
@@ -70,7 +70,7 @@
 <script>
 import {Field} from "vant";
 import Cookies from "js-cookie";
-import {smsSend, smsLogin, userLogin, register} from "@/api/login";
+import {smsSend, smsLogin, userLogin, register,authPhone} from "@/api/login";
 import md5 from 'js-md5';
 
 export default {
@@ -118,7 +118,8 @@ export default {
     },
     // 获取验证码
     getCode() {
-        authPhone(this.phone).then(res => {
+
+      authPhone(this.phone).then(res => {
         if (res.resp_message.indexOf('未注册') > -1) {
           this.$toast({message: res.resp_message, position: "bottom"});
         } else if (res.resp_message.indexOf('已注册') > -1) {
@@ -175,7 +176,7 @@ export default {
             if (res.result.realnameStatus == 1) {  //未实名 让跳转APP
               this.$router.replace({name: "home"});//首页
             } else {
-              this.$toast({message: '请到卡德世界APP实名后登录', position: 'bottom'})
+              this.$toast({message: '请到卡时间APP实名后登录', position: 'bottom'})
               this.$store.commit('Loading')
               let time = setTimeout(() => {
                 this.$store.commit('closeLoading')
@@ -215,7 +216,7 @@ export default {
             if (res.result.realnameStatus == 1) {
               this.$router.replace({name: "home"});//首页
             } else {
-              this.$toast({message: '请到卡德世界APP实名后登录', position: 'bottom'})
+              this.$toast({message: '请到卡时间APP实名后登录', position: 'bottom'})
               this.$store.commit('Loading')
               let time = setTimeout(() => {
                 this.$store.commit('closeLoading')

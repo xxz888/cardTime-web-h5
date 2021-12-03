@@ -7,7 +7,7 @@
       <div class="home_header_title">首页</div>
       <div class="home_header_item" @click="meiqia">
         <van-icon name="service-o" size="18px" :badge="dot? $store.state.user.unread:''"/>
-        <span class="ke"> 客服 </span>
+        <!-- <span class="ke"> 客服 </span> -->
       </div>
     </div>
     <div class="warpper_top"></div>
@@ -40,11 +40,12 @@
               <img src="@/assets/newicon/组 7942@2x.png" alt="">
               <div class="">信用管理</div>
             </li>
-            <li class="menu_item" @click="next('/profitHome',8)">
+            <!-- @click="next('/profitHome',8)" -->
+            <li class="menu_item" @click="cardApply">
               <img src="@/assets/newicon/组 7941@2x.png" alt="">
               <div class="">在线办卡</div>
             </li>
-            <li class="menu_item" @click="cardApply">
+            <li class="menu_item" @click="huabeiAction">
               <img src="@/assets/newicon/组 7944@2x.png" alt="">
               <div class="">花呗收款</div>
             </li>
@@ -172,6 +173,10 @@ export default {
     }
   },
   methods: {
+    //花呗
+    huabeiAction(){
+        this.$toast({message: "敬请期待", position: "bottom"});
+    },
     isSealname() { // 判断存储在本地的实名状态如果已实名开始判断认证状态
       if (localStorage.getItem('realnameStatus') != 1 && localStorage.getItem('realnameStatus') != null) {
         this.$toast({message: '请去APP实名后登录', position: 'bottom'})
@@ -360,7 +365,7 @@ export default {
 }
 
 .tabbar_p {
-  height: 50px;
+  height: 70px;
   width: 100%;
 }
 
@@ -495,7 +500,7 @@ export default {
   font-weight: 500;
   color: #333;
   display: inline-block;
-  border-left: 2.5px solid #F08300;
+  border-left: 2.5px solid #C49A4D;
   padding: 0 10px;
 }
 

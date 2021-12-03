@@ -30,7 +30,7 @@
         <div class="profit_share_cont">
           <div class="profit_type_top">
             <div class="profit_type_top_bg">
-              <van-dropdown-menu class="date_sel menu" active-color="#F08300" background="none">
+              <van-dropdown-menu class="date_sel menu" active-color="#C49A4D" background="none">
                 <van-dropdown-item v-model="yaer" :options="yearList" @change="dateChange"/>
                 <van-dropdown-item v-model="month" :options="monthList" @change="dateChange"/>
               </van-dropdown-menu>
@@ -39,7 +39,7 @@
           <ul class="profit_type_date">
             <li class="item van-hairline--bottom">
               <div>类型</div>
-              <div class="type">刷卡</div>
+              <div class="type">{{ title }}</div>
               <div class="type">分润</div>
               <p class="right"></p>
             </li>

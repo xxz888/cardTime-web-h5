@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar class="agent_nav theme_bg" style="background: none;" :border='false' title="收益中心" left-arrow
+    <van-nav-bar class="agent_nav theme_bg" style="background: none;" :border='false' title="收益中心" 
                  @click-left="onClickLeft">
       <template #right>
         <div class="color_fff" @click="$router.push('/regulation')">收益规则</div>
@@ -91,6 +91,8 @@
         </div>
       </div>
     </van-pull-refresh>
+          <div class="tabbar_p"></div>
+    <tabbar></tabbar>
   </div>
 </template>
 
@@ -110,6 +112,7 @@ import {
 import {
   getAccountQuery, getSumrebater
 } from "@/api/user";
+import tabbar from '@/components/tabbar'
 
 export default {
   data() {
@@ -128,7 +131,8 @@ export default {
   components: {
     [NavBar.name]: NavBar,
     [PullRefresh.name]: PullRefresh,
-    [Icon.name]: Icon
+    [Icon.name]: Icon,
+    tabbar
   },
   computed: {},
   created() {
@@ -222,7 +226,10 @@ export default {
 .agent_nav >>> .van-nav-bar__title.van-ellipsis {
   color: #fff;
 }
-
+.tabbar_p {
+  height: 50px;
+  width: 100%;
+}
 .agent_nav >>> .van-icon {
   color: #FFFFFF !important;
 }

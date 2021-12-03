@@ -1,246 +1,253 @@
 <template>
   <div>
-    <van-nav-bar class="agent_nav theme_bg" style="background: none;" :border='false' title="收益中心" left-arrow
-                 @click-left="onClickLeft">
-      <template #right>
-        <div class="color_fff" @click="$router.push('/regulation')">收益规则</div>
-      </template>
-    </van-nav-bar>
+    <van-nav-bar
+      class="agent_nav theme_bg"
+      style="background: none"
+      :border="false"
+      title="收益中心"
+      @click-left="onClickLeft"
+    />
     <div class="warpper_top"></div>
-    <van-pull-refresh v-model="isLoading" @refresh="onRefresh" loading-text="加载中...">
-      <div>
-        <div class="profit_home_top theme_bg">
+    <div>
+      <div class="profit_home_top theme_bg">
+        <div class="item" style="padding-bottom: 0">
+          <div class="schedule">
+            <p class="allRebate">可提现（元）</p>
+            <h3 class="allRebateH3">
+              {{ userAccount.currentBalance | toFixed }}
+            </h3>
+          </div>
+        </div>
+        <div class="item item_view" style="margin-left:10%;margin-right:10%">
+          <div class="right_border">
+            <p class="userid">当日收益（元）</p>
+            <p class="useridPrice">{{ userAccount.todayTotal | toFixed }}</p>
+          </div>
+          <div class="right_border">
+            <p class="userid">当月收益（元）</p>
+            <p class="useridPrice">{{ userAccount.curMonthTotal | toFixed }}</p>
+          </div>
+        </div>
+        <div class="item" style="margin-left:10%;margin-right:10%">
+          <div class="withdrawal" @click="next('/withdraw',8)">立即提现</div>
+          <div class="mibu" @click="next('creditLose',11)">弥补</div>
+        </div>
+      </div>
+      <div class="profit_home_cont_box">
+        <div class="profit_home_cont">
           <ul>
-            <li class="item">
-              <div class="left">
-                <div class="title">可提现（元）</div>
-                <div class="amount">{{ balance |toFixed }}</div>
-              </div>
-              <div class="right">
-                <div class="btn">
-                  <span class="withdrawal theme " @click="next('/withdraw',8,0)">提现</span>
-                  <span class="makeup" @click="next('creditLose',11)">弥补</span>
-                </div>
-              </div>
+            <li class="item" @click="next('/profitShare',8)">
+              <img src="@/assets/newicon/收益@2x.png" alt="" />
+              <p>推广收益</p>
             </li>
-            <li class="item">
-              <div class="left">
-                <div class="title">当日收益（元）</div>
-                <div class="profit_amount">{{ Number(todayRebate) |toFixed }}</div>
-              </div>
-              <div class="right">
-                <div class="title">当月收益（元）</div>
-                <div class="profit_amount">{{ Number(monthRebate) |toFixed }}</div>
-              </div>
+            <li class="item" @click="next('profitType',1,'刷卡')">
+              <img src="@/assets/newicon/刷卡@2x.png" alt="" />
+              <p>刷卡分润</p>
+            </li>
+            <li class="item" @click="next('profitType',2,'还款')">
+              <img src="@/assets/newicon/组 7977@2x.png" alt="" />
+              <p>还款分润</p>
+            </li>
+            <li class="item" @click="next('profitRecord',4,'达标奖励')">
+              <img src="@/assets/newicon/组 7976@2x.png" alt="" />
+              <p>达标奖励</p>
+            </li>
+            <li class="item" @click="next('/profitCashback',8)">
+              <img src="@/assets/newicon/组 7975@2x.png" alt="" />
+              <p>红利返现</p>
+            </li>
+            <li class="item" @click="next('profitType',3,'空卡')">
+              <img src="@/assets/newicon/产品分红@2x.png" alt="" />
+              <p>空卡分润</p>
+            </li>
+
+            <li class="item" @click="next('profitUser', 1)">
+              <img src="@/assets/newicon/组 7978@2x.png" alt="" />
+              <p>直推用户</p>
+            </li>
+            <li
+              class="item"
+              @click="next('profitRecord',8,'提现记录')"
+            >
+              <img src="@/assets/newicon/提现@2x.png" alt="" />
+              <p>提现记录</p>
+            </li>
+            <li class="item" @click="next('profitRecord',7,'弥补记录')">
+              <img src="@/assets/newicon/住房补贴明细@2x.png" alt="" />
+              <p>弥补记录</p>
             </li>
           </ul>
         </div>
-        <div class="profit_home_cont_box">
-          <div class="profit_home_cont">
-            <div class="title">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/title_icon.png" alt="">
-              <span>收益类型</span>
-            </div>
-            <ul>
-              <li class="item" @click="next('/profitShare',8)">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/share_icon.png" alt="">
-                <p>推广收益</p>
-              </li>
-              <li class="item" @click="next('profitType',1,'刷卡')">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/quick_icon.png" alt="">
-                <p>刷卡分润</p>
-              </li>
-              <li class="item" @click="next('profitType',2,'还款')">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/peyment_icon.png" alt="">
-                <p>还款分润</p>
-              </li>
-              <li class="item" @click="next('profitType',3,'空卡')">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/zero_icon.png" alt="">
-                <p>空卡分润</p>
-              </li>
-              <li class="item" @click="next('profitRecord',4,'达标奖励')">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/upto_standard_icon.png"
-                     alt="">
-                <p>达标奖励</p>
-              </li>
-              <li class="item" @click="next('/profitCashback',8)">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/cashback_icon.png"
-                     alt="">
-                <p>返现</p>
-              </li>
-            </ul>
-          </div>
-          <div class="profit_home_cont">
-            <div class="title">
-              <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/title_icon.png" alt="">
-              <span>其他</span>
-            </div>
-            <ul>
-              <li class="item" @click="next('profitUser',1,'直推用户')">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/user_icon.png" alt="">
-                <p>直推用户</p>
-              </li>
-              <li class="item" @click="next('profitRecord',8,'提现记录')">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/withdrawal_icon.png"
-                     alt="">
-                <p>提现记录</p>
-              </li>
-              <li class="item" @click="next('profitRecord',7,'弥补记录')">
-                <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/profit/makeup_icon.png" alt="">
-                <p>弥补记录</p>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
-    </van-pull-refresh>
+    </div>
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
-import {
-  NavBar,
-  PullRefresh,
-  Icon
-} from 'vant';
-import {
-  newsQuery,
-  getMessage
-} from '@/api/showBrand'
-import {
-  userQuotaQuery
-} from "@/api/creditManage";
-import {
-  getAccountQuery, getSumrebater
-} from "@/api/user";
+import { NavBar, PullRefresh, Icon } from "vant";
+import { newsQuery, getMessage } from "@/api/showBrand";
+import { userQuotaQuery } from "@/api/creditManage";
+import { getAccountQuery, getSumrebater } from "@/api/user";
+import tabbar from "@/components/tabbar";
 
 export default {
   data() {
     return {
-      brandId: localStorage.getItem('brandId'),
-      userId: localStorage.getItem('userId'),
-      token: localStorage.getItem('token'),
-      phone: localStorage.getItem('phone'),
+      brandId: localStorage.getItem("brandId"),
+      userId: localStorage.getItem("userId"),
+      token: localStorage.getItem("token"),
+      phone: localStorage.getItem("phone"),
       isLoading: false,
       fuwuList: [],
       balance: 0,
       monthRebate: 0,
-      todayRebate: 0
+      todayRebate: 0,
+
+      userAvatar: "",
+      allRebate: 0,
+      user: {},
+      userAccount: {},
     };
   },
   components: {
     [NavBar.name]: NavBar,
     [PullRefresh.name]: PullRefresh,
-    [Icon.name]: Icon
+    [Icon.name]: Icon,
+    tabbar,
   },
   created() {
-    this._newsQuery()
-    this._getAccountQuery()
-    this._getSumrebater()
-    this._getMessage()
+    this._newsQuery();
+    this._getAccountQuery();
+    this._getSumrebater();
+    this._getMessage();
   },
   activated() {
-    this._getMessage()
-    this._newsQuery()
-    this._getAccountQuery()
-    this._getSumrebater()
+    this._getMessage();
+    this._newsQuery();
+    this._getAccountQuery();
+    this._getSumrebater();
   },
   methods: {
     onClickLeft() {
       this.publicJs.back();
     },
+    //弥补
+    mibu(){
+
+    },
     //--------查询用户留言-----------
     _getMessage() {
-      getMessage(this.userId).then(res => {
-      })
+      getMessage(this.userId).then((res) => {});
     },
     _newsQuery() {
-      newsQuery(this.global.brandId, '功能跳转').then(res => {
-        if (res.resp_code == '000000') {
-          this.fuwuList = res.result.content
+      newsQuery(this.global.brandId, "功能跳转").then((res) => {
+        if (res.resp_code == "000000") {
+          this.fuwuList = res.result.content;
         }
-      })
+      });
     },
     _getAccountQuery() {
-      getAccountQuery(this.token).then(res => {
-        if (res.resp_code == '000000') {
-          this.balance = res.result.balance
+      getAccountQuery(this.token).then((res) => {
+        if (res.resp_code == "000000") {
+          this.balance = res.result.balance;
         }
-      })
+      });
     },
     _getSumrebater() {
-      getSumrebater(this.userId).then(res => {
-        if (res.resp_code == '000000') {
-          this.monthRebate = res.result.monthRebate
-          this.todayRebate = res.result.todayRebate
+      getSumrebater(this.userId).then((res) => {
+        if (res.resp_code == "000000") {
+          this.monthRebate = res.result.monthRebate;
+          this.todayRebate = res.result.todayRebate;
         }
-      })
+      });
     },
     next(path, type, title) {
-      if (title == 0) {  //如果点击提现按钮判断实名状态。未实名直接退出登录
-        if (localStorage.getItem('realnameStatus') != 1 && localStorage.getItem('realnameStatus') != null) {
-          this.$toast({message: '请去APP实名后登录', position: 'bottom'})
-          let did = localStorage.getItem('did')
-          localStorage.clear()
-          sessionStorage.clear()
+      if (title == 0) {
+        //如果点击提现按钮判断实名状态。未实名直接退出登录
+        if (
+          localStorage.getItem("realnameStatus") != 1 &&
+          localStorage.getItem("realnameStatus") != null
+        ) {
+          this.$toast({ message: "请去APP实名后登录", position: "bottom" });
+          let did = localStorage.getItem("did");
+          localStorage.clear();
+          sessionStorage.clear();
           if (did) {
-            localStorage.setItem('did', did)
+            localStorage.setItem("did", did);
           }
-          this.$router.push({name: 'login'})
+          this.$router.push({ name: "login" });
         } else {
-          if (type == 8 && path != 'profitRecord') {
-            this.$router.push({path: path});
+          if (type == 8 && path != "profitRecord") {
+            this.$router.push({ path: path });
           } else if (type == 11) {
-            this.$router.push({name: path, params: {type: JSON.stringify(type)}});
+            this.$router.push({
+              name: path,
+              params: { type: JSON.stringify(type) },
+            });
           } else {
-            this.$router.push({name: path, params: {level: JSON.stringify(type), title: JSON.stringify(title)}});
+            this.$router.push({
+              name: path,
+              params: {
+                level: JSON.stringify(type),
+                title: JSON.stringify(title),
+              },
+            });
           }
         }
       } else {
-        if (type == 8 && path != 'profitRecord') {
-          this.$router.push({path: path});
+        if (type == 8 && path != "profitRecord") {
+          this.$router.push({ path: path });
         } else if (type == 11) {
-          this.$router.push({name: path, params: {type: JSON.stringify(type)}});
+          this.$router.push({
+            name: path,
+            params: { type: JSON.stringify(type) },
+          });
         } else {
-          this.$router.push({name: path, params: {level: JSON.stringify(type), title: JSON.stringify(title)}});
+          this.$router.push({
+            name: path,
+            params: {
+              level: JSON.stringify(type),
+              title: JSON.stringify(title),
+            },
+          });
         }
       }
     },
     link(item) {
-      let num = 0
+      let num = 0;
       this.fuwuList.map((key) => {
         if (key.title == item) {
-          var url = key.content
+          var url = key.content;
           this.$router.push({
-            name: 'appLink',
+            name: "appLink",
             params: {
               url: JSON.stringify(url),
               title: JSON.stringify(key.title),
-              type: "2"
-            }
+              type: "2",
+            },
           });
-          return
+          return;
         } else {
-          num++
+          num++;
         }
-      })
+      });
       if (num == this.fuwuList.length) {
         this.$toast({
-          message: '敬请期待',
-          position: 'bottom'
-        })
+          message: "敬请期待",
+          position: "bottom",
+        });
       }
     },
     // 下拉刷新
     onRefresh() {
       setTimeout(() => {
-        this.$toast('刷新成功');
+        this.$toast("刷新成功");
         this.isLoading = false;
       }, 1000);
-    }
-  }
+    },
+  },
 };
-
 </script>
 <style scoped>
 .agent_nav >>> .van-nav-bar__title.van-ellipsis {
@@ -248,7 +255,7 @@ export default {
 }
 
 .agent_nav >>> .van-icon {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 .profit_home_top {
@@ -256,15 +263,41 @@ export default {
   padding: 10px 17px;
   font-size: 15px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+
+  background: url("../../assets/newicon/Rectangle@2x.png") no-repeat;
+  background-size: 100%;
+}
+
+.home_box {
 }
 
 .profit_home_top .item {
   display: flex;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 
-.profit_home_top .item > div {
+.item > .userAvatar {
   flex: 1;
+}
+
+.item > .userdata {
+  padding-top: 5px;
+  flex: 4;
+  font-size: 14px;
+}
+
+.userid {
+  margin-top: 5px;
+
+  font-size: 16px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 15px;
+  color: #f8fafb;
+  opacity: 0.6;
 }
 
 .profit_home_top .item .title {
@@ -298,15 +331,58 @@ export default {
   font-size: 15px;
 }
 
-.profit_home_top .item .right .btn .withdrawal {
-  background: #fff;
+.withdrawal {
+  /* background: #65D385;
   margin-right: 10px;
-  padding: 3px 10px;
+  margin: 0px auto;
+  width: 200px;
+  height: 35px;
+  border-radius: 5px;
+  line-height: 35px;
+  text-align: center; */
+  width: 120px;
+  height: 35px;
+  background: #ffffff;
+  opacity: 1;
+  border-radius: 20px;
+  font-size: 16px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 35px;
+  color: #c49a4d;
+  opacity: 1;
+  text-align: center;
+  margin-right: 10px;
+  margin: 0px auto;
+}
+.mibu {
+  border: 1px solid #ffffff;
+  opacity: 1;
+
+  width: 120px;
+  height: 35px;
+  opacity: 1;
+  border-radius: 20px;
+  font-size: 16px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 35px;
+  color: #fff;
+  opacity: 1;
+  text-align: center;
+  margin-right: 10px;
+  margin: 0px auto;
+}
+.profit_home_top .item .right .btn .makeup {
+  border: 1px solid #ffffff;
+  padding: 2px 9px;
 }
 
-.profit_home_top .item .right .btn .makeup {
-  border: 1px solid #FFFFFF;
-  padding: 2px 9px;
+.profit_home_cont {
+  width: 330px;
+  margin: -70px auto 0px auto;
+  border-radius: 5px;
+  background: #fff;
 }
 
 .profit_home_cont_box {
@@ -337,20 +413,76 @@ export default {
 }
 
 .profit_home_cont .item {
-  width: 25%;
+  width: 33%;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 15px 0px;
+  position: relative;
 }
 
 .profit_home_cont .item > img {
-  height: 24px;
-  width: 24px;
+  width: 30px;
 }
 
 .profit_home_cont .item > p {
   font-size: 12px;
   color: #333;
-  /* padding-top: px; */
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 40px;
+  bottom: 0;
 }
 
+.item_view div {
+  font-size: 16px;
+  text-align: center;
+  flex: 1;
+}
+
+.appLogo {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+}
+
+.schedule {
+  /* background: url('../../assets/newicon/组 8012@2x.png') no-repeat;
+  background-size: 100%; */
+  width: 200px;
+  height: 110px;
+  margin: 0px auto;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.allRebate {
+  margin-top: 5px;
+  font-size: 16px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 15px;
+  color: #f8fafb;
+  opacity: 0.6;
+}
+.allRebateH3 {
+  margin-top: 25px;
+  font-size: 50px;
+  font-family: DIN;
+  font-weight: bold;
+  line-height: 21px;
+  color: #f8fafb;
+  opacity: 1;
+}
+.right_border {
+  /* width: 40%; */
+}
+.useridPrice {
+  margin-top: 15px;
+  font-size: 26px;
+  font-family: DIN;
+  font-weight: 500;
+  line-height: 21px;
+  color: #f8fafb;
+  opacity: 1;
+}
 </style>

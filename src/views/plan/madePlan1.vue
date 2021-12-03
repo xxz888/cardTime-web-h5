@@ -1369,7 +1369,7 @@ export default {
 }
 
 .calendar .content div span.activeDay {
-  background: #FF3735 !important;
+  background: #C49A4D !important;
   color: #fff !important;
 }
 

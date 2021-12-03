@@ -220,7 +220,7 @@ export default {
 }
 
 .sms {
-  color: #F08300;
+  color: #C49A4D;
 }
 
 .cont .item .left > img {

@@ -15,7 +15,7 @@
             </div>
           </div>
           <div v-if="card.length == 0" class="def_card">
-            <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/logo.png" alt="">
+            <img src="../../assets/logo.png" alt="">
             <p>未设置默认提现卡</p>
           </div>
           <div class="card_right">
@@ -60,7 +60,7 @@
       confirmButtonColor="#FB933F"
       @confirm="gonext('card')">
       <div class="pop_title">
-        <img src="https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/logo.png" alt="">
+        <img src="../../assets/logo.png" alt="">
         <div>
           <h3>提醒</h3>
           <p>暂无默认银行卡，请前往添加</p>

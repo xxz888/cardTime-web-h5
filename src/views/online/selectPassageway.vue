@@ -122,8 +122,7 @@ export default {
 </script>
 <style scoped>
 .online_channel .top {
-  background: url("https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/channel_top_bg.png") center no-repeat;
-  background-size: 100% 100%;
+  background: #C49A4D;
   width: 100%;
   height: 155px;
   position: relative;
