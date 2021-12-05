@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <van-nav-bar :title="title" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
-      <template #right v-if="type==1">
+      <template #right >
         <van-icon name="weapp-nav" size="18"/>
       </template>
     </van-nav-bar>
@@ -44,8 +44,14 @@ export default {
   },
   created() {
     this.url = JSON.parse(this.$route.params.url)
-    this.title = JSON.parse(this.$route.params.title)
-    this.type = JSON.parse(this.$route.params.type)
+    if (this.title) {
+          this.title = JSON.parse(this.$route.params.title)
+
+    }
+    if (this.type && this.type != 0) {
+          this.type = JSON.parse(this.$route.params.type)
+
+    }
     if (this.url.substring(8, 24) == 'mp.weixin.qq.com') {
       location.href = this.url
     }

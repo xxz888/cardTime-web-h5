@@ -92,6 +92,10 @@ export default {
   },
   created() {
     this.phone = Cookies.get("kd_l_phone");
+    if (localStorage.getItem('token') && localStorage.getItem('token').length!=0) {
+        this.$router.replace({name: "home"});//首页
+
+    }
   },
   beforeRouteEnter: (to, from, next) => {
     if ((from.name == null || from.name == '') && localStorage.getItem('token')) { //判断从哪个页面进入如果有token 并且不是从退出登录进入 直接跳入主页
@@ -237,6 +241,7 @@ export default {
             sessionStorage.setItem("userName", res.result.fullname);
             sessionStorage.setItem("phone", res.result.phone);
             localStorage.setItem('realnameStatus', res.result.realnameStatus)
+            
           }
         })
       }

@@ -14,18 +14,18 @@
           <div class="schedule">
             <p class="allRebate">可提现（元）</p>
             <h3 class="allRebateH3">
-              {{ userAccount.currentBalance | toFixed }}
+              {{ allRebate }}
             </h3>
           </div>
         </div>
         <div class="item item_view" style="margin-left:10%;margin-right:10%">
           <div class="right_border">
             <p class="userid">当日收益（元）</p>
-            <p class="useridPrice">{{ userAccount.todayTotal | toFixed }}</p>
+            <p class="useridPrice">{{ todayRebate  }}</p>
           </div>
           <div class="right_border">
             <p class="userid">当月收益（元）</p>
-            <p class="useridPrice">{{ userAccount.curMonthTotal | toFixed }}</p>
+            <p class="useridPrice">{{ monthRebate  }}</p>
           </div>
         </div>
         <div class="item" style="margin-left:10%;margin-right:10%">
@@ -103,7 +103,6 @@ export default {
       balance: 0,
       monthRebate: 0,
       todayRebate: 0,
-
       userAvatar: "",
       allRebate: 0,
       user: {},
@@ -159,6 +158,7 @@ export default {
         if (res.resp_code == "000000") {
           this.monthRebate = res.result.monthRebate;
           this.todayRebate = res.result.todayRebate;
+          this.allRebate = res.result.allRebate;
         }
       });
     },

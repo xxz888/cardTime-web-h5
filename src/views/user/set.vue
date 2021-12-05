@@ -19,6 +19,7 @@
 <script>
 import {NavBar, Cell, CellGroup, Dialog} from 'vant';
 import {brandQuery} from '@/api/showBrand'
+import Cookies from "js-cookie";
 
 export default {
   data() {

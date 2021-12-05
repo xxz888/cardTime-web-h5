@@ -12,8 +12,9 @@ import {router} from '../router';
 // let ip = "https://api.flyaworld.com/v1.0"
 // let ip = "https://caderapi.caderworld.com/v1.0"
 // let ip = 'http://139.196.145.125/v1.0'
-let ip = "https://api.flyaworld.com/v1.0"
+// let ip = "https://api.flyaworld.com/v1.0"
 // let ip = "http://103.113.158.61:18080/v1.0"
+let ip = "http://api.dingdingxiaoer.com/v1.0"
 
 
 export function getIp(){
