@@ -62,7 +62,7 @@ export default {
   },
   created() {
     this.num = this.$route.params.num
-    // this._preUserQuery()
+    this._preUserQuery()
     this.getBrand()
   },
   methods: {

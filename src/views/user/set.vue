@@ -66,11 +66,14 @@ export default {
         message: '确认要退出登录吗？'
       }).then(() => {
         let did = localStorage.getItem('did')
-        localStorage.clear()
+        localStorage.clear();
         sessionStorage.clear()
         if (did) {
           localStorage.setItem('did', did)
         }
+      Cookies.remove('token');
+
+            
         this.$router.push({name: 'login'})
       }).catch(() => {
       })

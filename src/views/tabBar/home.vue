@@ -109,7 +109,7 @@
                 :autoplay="3000"
                 indicator-color="white"
               >
-                <van-swipe-item @click="link1">
+                <van-swipe-item @click="shougonggao = true">
                   <img src="@/assets/newicon/蒙版组 112@2x.png" style="object-fit:fill;width:100%" alt="" />
                 </van-swipe-item>
               </van-swipe>
@@ -142,11 +142,16 @@
     <div class="tabbar_p"></div>
     <tabbar></tabbar>
     <guide step="1" @next="next('/online', 8)" />
+
+
+<van-dialog v-model="shougonggao" title="关于卡德世界收购公告">
+  <img src="../../assets/gonggao1.png" style="width:100%;height:100%"/>
+</van-dialog>
   </div>
 </template>
 
 <script>
-import { PullRefresh, NoticeBar, Swipe, SwipeItem, Icon } from "vant";
+import { PullRefresh, NoticeBar, Swipe, SwipeItem, Icon,Dialog } from "vant";
 import tabbar from "@/components/tabbar";
 import { userInfoQuery } from "@/api/user";
 import {
@@ -162,6 +167,7 @@ export default {
   data() {
     return {
       dot: false,
+      shougonggao:false,
       token: localStorage.getItem("token"),
       phone: localStorage.getItem("phone"),
       userId: localStorage.getItem("userId"),
@@ -180,6 +186,7 @@ export default {
     [Icon.name]: Icon,
     tabbar,
     guide,
+    [Dialog.Component.name]: Dialog.Component,
   },
   created() {
     this.getBanners(0);
@@ -228,6 +235,8 @@ export default {
         let did = localStorage.getItem("did");
         localStorage.clear();
         sessionStorage.clear();
+        Cookies.remove('token');
+
         if (did) {
           localStorage.setItem("did", did);
         }
@@ -291,33 +300,32 @@ export default {
         if (res.resp_code == "000000") {
           this.newsList = res.result.content;
         
-          var isshow = Cookies.get("kd_l_isshow");
 
           if (res.result.content.length != 0) {
+
+
+
             var endTime = this.dateToTimestamp(res.result.content[0].endTime);
             var currentTime = Date.parse(new Date());
-            if (isshow == 1) {
-              if (currentTime > endTime) {
-                this.$dialog
+
+            var isshow;var valueId;
+            if (localStorage.getItem("kd_l_isshow")) {
+              isshow  = localStorage.getItem("kd_l_isshow").split('||')[0];
+              valueId = localStorage.getItem("kd_l_isshow").split('||')[1];
+            }
+            if (isshow == 1 && valueId == res.result.content[0].id) {
+            
+            } else{
+                  this.$dialog
                   .alert({
                     title: res.result.content[0].title,
                     message: res.result.content[0].content,
                     theme: "round-button",
                   })
                   .then(() => {
-                    Cookies.set("kd_l_isshow", "1");
+                    var value = '1||'+res.result.content[0].id;
+                     localStorage.setItem("kd_l_isshow", value);
                   });
-              }
-            } else {
-              this.$dialog
-                .alert({
-                  title: res.result.content[0].title,
-                  message: res.result.content[0].content,
-                  theme: "round-button",
-                })
-                .then(() => {
-                  Cookies.set("kd_l_isshow", "1");
-                });
             }
           }
         }
@@ -337,6 +345,9 @@ export default {
     },
     link1(){
           
+
+
+
           this.$router.push({
             name: "appLink",
             params: {

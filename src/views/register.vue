@@ -77,10 +77,11 @@ export default {
   created() {
     this.phone = Cookies.get("kd_l_phone");
     let did = localStorage.getItem('did')
-    localStorage.clear()
+    localStorage.clear();
     if (did) {
       localStorage.setItem('did', did)
     }
+      Cookies.remove('token');
     this.phone = null
   },
   methods: {

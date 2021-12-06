@@ -91,9 +91,26 @@ export default {
     [Field.name]: Field,
   },
   created() {
-    this.phone = Cookies.get("kd_l_phone");
-    if (localStorage.getItem('token') && localStorage.getItem('token').length!=0) {
-        this.$router.replace({name: "home"});//首页
+
+            
+
+    if (Cookies.get('token') && Cookies.get('token').length!=0) {
+
+          localStorage.setItem("userId", Cookies.get("userId"));
+          localStorage.setItem("phone", Cookies.get("phone"));
+          localStorage.setItem("token", Cookies.get("token"));
+          localStorage.setItem("ip", Cookies.get("ip"));
+          localStorage.setItem("userName", Cookies.get("userName"));
+          localStorage.setItem("loginT", Cookies.get("loginT"));
+          localStorage.setItem('brandId',Cookies.get('brandId'))
+          this.deviceId();
+          Cookies.set("kd_l_phone", Cookies.get("phone"));
+          sessionStorage.setItem("userName", Cookies.get("userName"));
+          sessionStorage.setItem("phone", Cookies.get("kd_l_phone"));
+          localStorage.setItem('realnameStatus', Cookies.get('realnameStatus'))
+          
+          this.$router.replace({name: "home"});//首页
+
 
     }
   },
@@ -201,6 +218,20 @@ export default {
             sessionStorage.setItem("userName", res.result.fullname);
             sessionStorage.setItem("phone", res.result.phone);
             localStorage.setItem('realnameStatus', res.result.realnameStatus)
+
+
+            Cookies.set("userId", res.result.id);
+            Cookies.set("phone", res.result.phone);
+            Cookies.set("token", res.result.userToken);
+            Cookies.set("ip", this.global.ip);
+            Cookies.set("userName", res.result.fullname);
+            Cookies.set("loginT", true);
+            lCookies.set('brandId', res.result.brandId)
+            Cookies.set("kd_l_phone", this.phone);
+            Cookies.set("userName", res.result.fullname);
+            Cookies.set("phone", res.result.phone);
+            Cookies.set('realnameStatus', res.result.realnameStatus)
+            
           }
         });
       } else {

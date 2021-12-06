@@ -13,19 +13,19 @@
         <div class="item" style="padding-bottom: 0">
           <div class="schedule">
             <p class="allRebate">可提现（元）</p>
-            <h3 class="allRebateH3">
-              {{ allRebate }}
-            </h3>
+            <p class="allRebateH3">
+              {{ balance }}
+            </p>
           </div>
         </div>
         <div class="item item_view" style="margin-left:10%;margin-right:10%">
           <div class="right_border">
             <p class="userid">当日收益（元）</p>
-            <p class="useridPrice">{{ todayRebate  }}</p>
+            <p class="useridPrice">{{ Number(todayRebate) |toFixed }}</p>
           </div>
           <div class="right_border">
             <p class="userid">当月收益（元）</p>
-            <p class="useridPrice">{{ monthRebate  }}</p>
+            <p class="useridPrice">{{ Number(monthRebate) |toFixed }}</p>
           </div>
         </div>
         <div class="item" style="margin-left:10%;margin-right:10%">
@@ -88,7 +88,7 @@
 import { NavBar, PullRefresh, Icon } from "vant";
 import { newsQuery, getMessage } from "@/api/showBrand";
 import { userQuotaQuery } from "@/api/creditManage";
-import { getAccountQuery, getSumrebater } from "@/api/user";
+import { getAccountQuery, getSumrebater ,getAccountSum } from "@/api/user";
 import tabbar from "@/components/tabbar";
 
 export default {
@@ -101,10 +101,10 @@ export default {
       isLoading: false,
       fuwuList: [],
       balance: 0,
-      monthRebate: 0,
-      todayRebate: 0,
+      monthRebate: '',
+      todayRebate: '',
       userAvatar: "",
-      allRebate: 0,
+      allRebate: '',
       user: {},
       userAccount: {},
     };
@@ -118,14 +118,14 @@ export default {
   created() {
     this._newsQuery();
     this._getAccountQuery();
-    this._getSumrebater();
+    // this._getSumrebater();
     this._getMessage();
   },
   activated() {
     this._getMessage();
     this._newsQuery();
     this._getAccountQuery();
-    this._getSumrebater();
+    // this._getSumrebater();
   },
   methods: {
     onClickLeft() {
@@ -147,9 +147,12 @@ export default {
       });
     },
     _getAccountQuery() {
-      getAccountQuery(this.token).then((res) => {
+      getAccountSum(this.token).then((res) => {
         if (res.resp_code == "000000") {
-          this.balance = res.result.balance;
+          this.balance = res.result.usableWithdrawAmount;
+          this.monthRebate = res.result.monthRebate;
+          this.todayRebate = res.result.todayRebate;
+
         }
       });
     },
@@ -158,7 +161,6 @@ export default {
         if (res.resp_code == "000000") {
           this.monthRebate = res.result.monthRebate;
           this.todayRebate = res.result.todayRebate;
-          this.allRebate = res.result.allRebate;
         }
       });
     },
@@ -171,7 +173,7 @@ export default {
         ) {
           this.$toast({ message: "请去APP实名后登录", position: "bottom" });
           let did = localStorage.getItem("did");
-          localStorage.clear();
+          localStorage.clear();Cookies.remove('token');
           sessionStorage.clear();
           if (did) {
             localStorage.setItem("did", did);
@@ -466,7 +468,7 @@ export default {
 }
 .allRebateH3 {
   margin-top: 25px;
-  font-size: 50px;
+  font-size: 40px;
   font-family: DIN;
   font-weight: bold;
   line-height: 21px;

@@ -106,7 +106,13 @@ export function getAccountQuery(token) {
       method: 'get',
   })
 }
-
+/** 账户资产 post */
+export function getAccountSum(token) {
+  return request({
+      url: '/user/app/query/user/account/sum',
+      method: 'post',
+  })
+}
 /** 获取今日和所有收益 post */
 export function getSumrebater(user_id) {
   return request({

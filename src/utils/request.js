@@ -73,6 +73,13 @@ service.interceptors.response.use(
         message: res.resp_message,
         confirmButtonText: "立即重登"
       }).then(() => {
+        let did = localStorage.getItem('did')
+        localStorage.clear();
+        Cookies.remove('token');
+        sessionStorage.clear()
+        if (did) {
+          localStorage.setItem('did', did)
+        }
         router.push({name: 'login'});
       });
     } else if (res.resp_code == '000000') {

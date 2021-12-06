@@ -45,7 +45,7 @@ export default {
     [Icon.name]: Icon,
   },
   created() {
-    // this._preUserQuery()
+    this._preUserQuery()
   },
   methods: {
     onClickLeft() {

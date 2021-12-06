@@ -99,7 +99,7 @@ export default {
         if (res.resp_code == '000000') {
           this.$toast({message: '密码修改' + res.resp_message + '请重新登录', position: 'bottom'})
           let did = localStorage.getItem('did')
-          localStorage.clear()
+          localStorage.clear();Cookies.remove('token');
           if (did)
             localStorage.setItem('did', did)
           this.$router.push({name: 'login'})

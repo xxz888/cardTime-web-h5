@@ -237,11 +237,13 @@ export default {
       if (localStorage.getItem('realnameStatus') != 1 && localStorage.getItem('realnameStatus') != null) {
         this.$toast({message: '请去APP实名后登录', position: 'bottom'})
         let did = localStorage.getItem('did')
-        localStorage.clear()
+        localStorage.clear();
         sessionStorage.clear()
         if (did) {
           localStorage.setItem('did', did)
         }
+              Cookies.remove('token');
+
         this.$router.push({name: 'login'})
       } else {
         if (this.tiantype == 2) {
@@ -255,7 +257,7 @@ export default {
       if (localStorage.getItem('realnameStatus') != 1 && localStorage.getItem('realnameStatus') != null) {
         this.$toast({message: '请去APP实名后登录', position: 'bottom'})
         let did = localStorage.getItem('did')
-        localStorage.clear()
+        localStorage.clear();Cookies.remove('token');
         sessionStorage.clear()
         if (did) {
           localStorage.setItem('did', did)
@@ -286,7 +288,7 @@ export default {
       if (localStorage.getItem('realnameStatus') != 1 && localStorage.getItem('realnameStatus') != null) {
         this.$toast({message: '请去APP实名后登录', position: 'bottom'})
         let did = localStorage.getItem('did')
-        localStorage.clear()
+        localStorage.clear();Cookies.remove('token');
         sessionStorage.clear()
         if (did) {
           localStorage.setItem('did', did)
