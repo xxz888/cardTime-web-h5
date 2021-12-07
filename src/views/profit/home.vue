@@ -171,7 +171,8 @@ export default {
           localStorage.getItem("realnameStatus") != 1 &&
           localStorage.getItem("realnameStatus") != null
         ) {
-           this.$router.push({name: "faceRecognitionDetail"});//实名认证
+
+          this.$router.push({name: "faceRecognitionDetail"});
 
           // this.$toast({ message: "请去APP实名后登录", position: "bottom" });
           // let did = localStorage.getItem("did");

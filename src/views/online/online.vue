@@ -235,16 +235,18 @@ export default {
     },
     tian(type) {
       if (localStorage.getItem('realnameStatus') != 1 && localStorage.getItem('realnameStatus') != null) {
-        this.$toast({message: '请去APP实名后登录', position: 'bottom'})
-        let did = localStorage.getItem('did')
-        localStorage.clear();
-        sessionStorage.clear()
-        if (did) {
-          localStorage.setItem('did', did)
-        }
-              Cookies.remove('token');
+        // this.$toast({message: '请去APP实名后登录', position: 'bottom'})
+        // let did = localStorage.getItem('did')
+        // localStorage.clear();
+        // sessionStorage.clear()
+        // if (did) {
+        //   localStorage.setItem('did', did)
+        // }
+        //       Cookies.remove('token');
 
-        this.$router.push({name: 'login'})
+        // this.$router.push({name: 'login'})
+                       this.$router.push({name: "faceRecognitionDetail"});
+
       } else {
         if (this.tiantype == 2) {
           this.$router.push({name: 'depositCardAdd', params: {'type': JSON.stringify(this.tiantype)}})
@@ -255,14 +257,15 @@ export default {
     },
     seleDefCard(active) {
       if (localStorage.getItem('realnameStatus') != 1 && localStorage.getItem('realnameStatus') != null) {
-        this.$toast({message: '请去APP实名后登录', position: 'bottom'})
-        let did = localStorage.getItem('did')
-        localStorage.clear();Cookies.remove('token');
-        sessionStorage.clear()
-        if (did) {
-          localStorage.setItem('did', did)
-        }
-        this.$router.push({name: 'login'})
+        // this.$toast({message: '请去APP实名后登录', position: 'bottom'})
+        // let did = localStorage.getItem('did')
+        // localStorage.clear();Cookies.remove('token');
+        // sessionStorage.clear()
+        // if (did) {
+        //   localStorage.setItem('did', did)
+        // }
+        // this.$router.push({name: 'login'})
+             this.$router.push({name: "faceRecognitionDetail"});
       } else {
         this.$router.push({
           name: 'myCard',
@@ -286,14 +289,16 @@ export default {
     // 选择通道
     setChannel(recommend) {
       if (localStorage.getItem('realnameStatus') != 1 && localStorage.getItem('realnameStatus') != null) {
-        this.$toast({message: '请去APP实名后登录', position: 'bottom'})
-        let did = localStorage.getItem('did')
-        localStorage.clear();Cookies.remove('token');
-        sessionStorage.clear()
-        if (did) {
-          localStorage.setItem('did', did)
-        }
-        this.$router.push({name: 'login'})
+        // this.$toast({message: '请去APP实名后登录', position: 'bottom'})
+        // let did = localStorage.getItem('did')
+        // localStorage.clear();Cookies.remove('token');
+        // sessionStorage.clear()
+        // if (did) {
+        //   localStorage.setItem('did', did)
+        // }
+        // this.$router.push({name: 'login'})
+                       this.$router.push({name: "faceRecognitionDetail"});
+
         return
       }
       if (this.money == '') {

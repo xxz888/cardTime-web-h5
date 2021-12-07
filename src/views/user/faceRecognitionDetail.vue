@@ -162,6 +162,7 @@ export default {
         this.$toast({message: '请检测身份证反面', position: 'bottom'});
         return
       }
+
       if (!this.userMessage.name || !this.userMessage.number) {
         this.$toast({message: '请重新上传身份证', position: 'bottom'});
         return
@@ -218,29 +219,29 @@ export default {
           formdata.append('address', this.userMessage.address)
           await this._submitImage(blob)
 
-          await cardComparison(formdata).then(res => {
-            if (res.resp_code == '000000') {
-              userInfoQuery(this.token).then(res => {
-                this.$store.commit('closeLoading')
-                if (res.resp_code == "000000") {
-                  localStorage.setItem('realnameStatus', res.result.realnameStatus)
-                  this.$router.push({name: "depositCardAdd", params: {type: 1}}); //绑卡页面
-                }
-              })
-            } else {
-              this.$store.commit('closeLoading')
-            }
-          })
+          // await cardComparison(formdata).then(res => {
+          //   if (res.resp_code == '000000') {
+          //     userInfoQuery(this.token).then(res => {
+          //       this.$store.commit('closeLoading')
+          //       if (res.resp_code == "000000") {
+          //         localStorage.setItem('realnameStatus', res.result.realnameStatus)
+          //         this.$router.push({name: "depositCardAdd", params: {type: 1}}); //绑卡页面
+          //       }
+          //     })
+          //   } else {
+          //     this.$store.commit('closeLoading')
+          //   }
+          // })
         }
       }
     },
     _submitImage(file) {
       let form = new FormData()
-      form.append('faceFile', file)
+      // form.append('faceFile', file)
       form.append('backFile', this.backFile)
       form.append('headFile', this.headFile)
       submitImage(form).then(res => {
-        return res
+          this.$router.replace({name: "home"});//首页
       })
     },
     changeFile(file) {

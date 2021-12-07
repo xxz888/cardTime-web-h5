@@ -189,6 +189,7 @@ export default {
     [Dialog.Component.name]: Dialog.Component,
   },
   created() {
+
     this.getBanners(0);
     this._getBrandNews();
     this._newsQuery();
@@ -196,6 +197,7 @@ export default {
     this.isSealname();
   },
   activated() {
+
     this._getMessage();
   },
   beforeRouteEnter(to, from, next) {

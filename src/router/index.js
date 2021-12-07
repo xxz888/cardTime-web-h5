@@ -498,6 +498,14 @@ const routes = [
     },
   },
   {
+    path: "/faceRecognitionDetail1",
+    name: "faceRecognitionDetail1",
+    component: () => import("@/views/user/faceRecognitionDetail1"),
+    meta: {
+      title: '实名认证',
+    },
+  },
+  {
     path: "/authorization",
     name: "authorization",
     component: () => import("@/views/user/authorization"),
