@@ -251,14 +251,16 @@ export default {
             if (res.result.realnameStatus == 1) {
               this.$router.replace({name: "home"});//首页
             } else {
-              this.$toast({message: '请到卡时间APP实名后登录', position: 'bottom'})
-              this.$store.commit('Loading')
-              let time = setTimeout(() => {
-                this.$store.commit('closeLoading')
-                this._getDownload()
-                clearTimeout(time)
-              }, 2500);
-              return
+              this.$router.push({name: "faceRecognitionDetail"});//实名认证
+
+              // this.$toast({message: '请到卡时间APP实名后登录', position: 'bottom'})
+              // this.$store.commit('Loading')
+              // let time = setTimeout(() => {
+              //   this.$store.commit('closeLoading')
+              //   this._getDownload()
+              //   clearTimeout(time)
+              // }, 2500);
+              // return
             }
             localStorage.setItem("userId", res.result.id);
             localStorage.setItem("phone", res.result.phone);

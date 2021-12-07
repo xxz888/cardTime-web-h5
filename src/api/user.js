@@ -205,7 +205,10 @@ export function submitAutonym(idcard,name,image,address){
     url: '/user/app/tysj/IDCard/contrast',
     method: 'post',
     data:qs.stringify({
-      idcard,name,image,address
+      "idcard":idcard,
+      "name":name,
+      "image":image,
+      "address":address
     })
   })
 }

@@ -19,13 +19,13 @@
               <div class="phone">{{ user.phone | dataHidden }}</div>
               <div class="id">ID:{{ userId }}</div>
             </div>
-            <!-- <div class="more" @click="next('/user','8')">
+            <div class="more" @click="next('/user','8')">
               <div class="own">
                 <span>个人资料</span>
                 <van-icon class="icon_icon" size="16" name="arrow"/>
               </div>
 
-            </div> -->
+            </div>
           </div>
         </div>
         <div class="my_cell_box">

@@ -13,7 +13,7 @@
                 <div class="idcard">
                   <label for="idcardz" class="idcardz_bg"
                          :style=" imgz ? 'background: url('+ imgz+') no-repeat;' : ''"></label>
-                  <input name="faceFile" type="file" accept="image/*" style="display:none"
+                  <input name="headFile" type="file" accept="image/*" style="display:none"
                          @change="chooseFile('1',$event)" id="idcardz"/>
                 </div>
               </div>
@@ -30,6 +30,17 @@
               </div>
               <h6>请点击拍摄身份证背面</h6>
             </li>
+            <li>
+              <div class="idCardImg">
+                <div class="idcard">
+                  <label for="idcards" class="idcardl_bg"
+                         :style=" imgs ? 'background: url('+ imgs+') no-repeat;' : ''"></label>
+                  <input name="faceFile" type="file" accept="image/*" style="display:none"
+                         @change="chooseFile('3',$event)" id="idcards"/>
+                </div>
+              </div>
+              <h6>请点击拍摄本人正面照</h6>
+            </li>
           </ul>
         </form>
         <form>
@@ -38,7 +49,7 @@
                      type="text" label="身份证号" required/>
         </form>
       </div>
-      <div class="submit make_plan_btn theme_btn color_fff" @click="submit()">人脸认证</div>
+      <div class="submit make_plan_btn theme_btn color_fff" @click="submit()">实名认证</div>
       <van-uploader id='ren' v-show="false" preview-size="80px" accept="image/*" :after-read="ren"></van-uploader>
     </div>
   </div>
@@ -85,7 +96,8 @@ export default {
       show: false,
       imgbaser: '',
       NumberKeyboardShow: false,
-      idcard: ''
+      idcard: '',
+      base64String:''
     };
   },
   components: {
@@ -127,6 +139,11 @@ export default {
             this.imgf = window.URL.createObjectURL(e.target.files[0])
             this.backFile = rst.file
             this._updateRealnameImage(rst.formData)
+          } else if (Number(index) == 3) {
+            
+            this.imgs = window.URL.createObjectURL(e.target.files[0])
+            this.faceFile = rst.file
+            this.base64String = rst.base64;
           }
         })
         .catch(err => {
@@ -149,12 +166,30 @@ export default {
         this.$toast({message: '请重新上传身份证', position: 'bottom'});
         return
       }
-      this.$dialog.alert({
-        title: '温馨提示',
-        message: '请上传或拍摄一张手持身份证正面照片'
-      }).then(() => {
-        document.getElementById('ren').click()
-      })
+      this._submitImage(this.headFile);
+
+        submitAutonym(this.userMessage.number, this.userMessage.name, this.base64String, this.userMessage.address).then(res => {
+            if (res.resp_code == '000000') {
+              userInfoQuery(this.token).then(res => {
+                this.$store.commit('closeLoading')
+                if (res.resp_code == "000000") {
+                  localStorage.setItem('realnameStatus', res.result.realnameStatus)
+                  this.$router.push({name: "home"}); 
+                }
+              })
+            } else {
+              this.$store.commit('closeLoading')
+            }
+          })
+
+
+
+      // this.$dialog.alert({
+      //   title: '温馨提示',
+      //   message: '请上传或拍摄一张手持身份证正面照片'
+      // }).then(() => {
+      //   document.getElementById('ren').click()
+      // })
     },
     ren(data) {
       this.$store.commit('Loading')
@@ -437,15 +472,19 @@ export default {
 }
 
 .idcardz_bg {
-  background: url("https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/idcardback.png") no-repeat;
+  background: url('../../assets/faceRecognition/idcardz.png') no-repeat;
   background-size: 100%;
 }
 
 .idcardf_bg {
-  background: url('https://cader-install.oss-cn-shanghai.aliyuncs.com/backManage/idcardjust.png') no-repeat;
+  background: url('../../assets/faceRecognition/idcardf.png') no-repeat;
   background-size: 100%;
 }
 
+.idcardl_bg {
+  background: url('../../assets/faceRecognition/idcardl.png') no-repeat;
+  background-size: 100%;
+}
 .idcard img {
   width: 160px;
   height: 100px;

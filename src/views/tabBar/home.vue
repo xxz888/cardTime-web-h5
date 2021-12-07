@@ -231,17 +231,19 @@ export default {
         localStorage.getItem("realnameStatus") != 1 &&
         localStorage.getItem("realnameStatus") != null
       ) {
-        this.$toast({ message: "请去APP实名后登录", position: "bottom" });
-        let did = localStorage.getItem("did");
-        localStorage.clear();
-        sessionStorage.clear();
-        Cookies.remove('token');
+        this.$router.push({name: "faceRecognitionDetail"});//实名认证
 
-        if (did) {
-          localStorage.setItem("did", did);
-        }
+        // this.$toast({ message: "请去APP实名后登录", position: "bottom" });
+        // let did = localStorage.getItem("did");
+        // localStorage.clear();
+        // sessionStorage.clear();
+        // Cookies.remove('token');
+
+        // if (did) {
+        //   localStorage.setItem("did", did);
+        // }
         
-        this.$router.push({ name: "login" });
+        // this.$router.push({ name: "login" });
       } else {
         this._getUserMessage();
       }
