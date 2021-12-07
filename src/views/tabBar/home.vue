@@ -189,6 +189,7 @@ export default {
     [Dialog.Component.name]: Dialog.Component,
   },
   created() {
+
     this.getBanners(0);
     this._getBrandNews();
     this._newsQuery();
@@ -196,6 +197,7 @@ export default {
     this.isSealname();
   },
   activated() {
+
     this._getMessage();
   },
   beforeRouteEnter(to, from, next) {
@@ -231,17 +233,19 @@ export default {
         localStorage.getItem("realnameStatus") != 1 &&
         localStorage.getItem("realnameStatus") != null
       ) {
-        this.$toast({ message: "请去APP实名后登录", position: "bottom" });
-        let did = localStorage.getItem("did");
-        localStorage.clear();
-        sessionStorage.clear();
-        Cookies.remove('token');
+                this.$router.push({name: "faceRecognitionDetail"});
 
-        if (did) {
-          localStorage.setItem("did", did);
-        }
+        // this.$toast({ message: "请去APP实名后登录", position: "bottom" });
+        // let did = localStorage.getItem("did");
+        // localStorage.clear();
+        // sessionStorage.clear();
+        // Cookies.remove('token');
+
+        // if (did) {
+        //   localStorage.setItem("did", did);
+        // }
         
-        this.$router.push({ name: "login" });
+        // this.$router.push({ name: "login" });
       } else {
         this._getUserMessage();
       }

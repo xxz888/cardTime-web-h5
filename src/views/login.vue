@@ -195,16 +195,21 @@ export default {
           this.$store.commit('closeLoading')
           if (res.resp_code == "000000") {
             if (res.result.realnameStatus == 1) {  //未实名 让跳转APP
-              this.$router.replace({name: "home"});//首页
+              // this.$router.replace({name: "home"});//首页
+                             this.$router.push({name: "faceRecognitionDetail"});
+
             } else {
-              this.$toast({message: '请到卡时间APP实名后登录', position: 'bottom'})
-              this.$store.commit('Loading')
-              let time = setTimeout(() => {
-                this.$store.commit('closeLoading')
-                this._getDownload()
-                clearTimeout(time)
-              }, 2500);
-              return
+               this.$router.push({name: "faceRecognitionDetail"});
+
+
+              // this.$toast({message: '请到卡时间APP实名后登录', position: 'bottom'})
+              // this.$store.commit('Loading')
+              // let time = setTimeout(() => {
+              //   this.$store.commit('closeLoading')
+              //   this._getDownload()
+              //   clearTimeout(time)
+              // }, 2500);
+              // return
             }
             localStorage.setItem("userId", res.result.id);
             localStorage.setItem("phone", res.result.phone);
