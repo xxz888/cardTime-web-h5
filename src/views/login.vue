@@ -195,9 +195,7 @@ export default {
           this.$store.commit('closeLoading')
           if (res.resp_code == "000000") {
             if (res.result.realnameStatus == 1) {  //未实名 让跳转APP
-              // this.$router.replace({name: "home"});//首页
-                             this.$router.push({name: "faceRecognitionDetail"});
-
+               this.$router.replace({name: "home"});//首页
             } else {
                this.$router.push({name: "faceRecognitionDetail"});
 

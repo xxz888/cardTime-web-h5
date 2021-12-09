@@ -110,7 +110,11 @@
                 indicator-color="white"
               >
                 <van-swipe-item @click="shougonggao = true">
-                  <img src="@/assets/newicon/蒙版组 112@2x.png" style="object-fit:fill;width:100%" alt="" />
+                  <img
+                    src="@/assets/newicon/蒙版组 112@2x.png"
+                    style="object-fit: fill; width: 100%"
+                    alt=""
+                  />
                 </van-swipe-item>
               </van-swipe>
             </div>
@@ -143,15 +147,14 @@
     <tabbar></tabbar>
     <guide step="1" @next="next('/online', 8)" />
 
-
-<van-dialog v-model="shougonggao" title="关于卡德世界收购公告">
-  <img src="../../assets/gonggao1.png" style="width:100%;height:100%"/>
-</van-dialog>
+    <van-dialog v-model="shougonggao" title="关于卡德世界收购公告">
+      <img src="../../assets/gonggao1.png" style="width: 100%; height: 100%" />
+    </van-dialog>
   </div>
 </template>
 
 <script>
-import { PullRefresh, NoticeBar, Swipe, SwipeItem, Icon,Dialog } from "vant";
+import { PullRefresh, NoticeBar, Swipe, SwipeItem, Icon, Dialog } from "vant";
 import tabbar from "@/components/tabbar";
 import { userInfoQuery } from "@/api/user";
 import {
@@ -167,7 +170,7 @@ export default {
   data() {
     return {
       dot: false,
-      shougonggao:false,
+      shougonggao: false,
       token: localStorage.getItem("token"),
       phone: localStorage.getItem("phone"),
       userId: localStorage.getItem("userId"),
@@ -189,7 +192,6 @@ export default {
     [Dialog.Component.name]: Dialog.Component,
   },
   created() {
-
     this.getBanners(0);
     this._getBrandNews();
     this._newsQuery();
@@ -197,7 +199,6 @@ export default {
     this.isSealname();
   },
   activated() {
-
     this._getMessage();
   },
   beforeRouteEnter(to, from, next) {
@@ -220,8 +221,8 @@ export default {
     },
   },
   methods: {
-    hdt(){
-    this.$toast('暂未开放')
+    hdt() {
+      this.$toast("暂未开放");
     },
     //花呗
     huabeiAction() {
@@ -233,19 +234,7 @@ export default {
         localStorage.getItem("realnameStatus") != 1 &&
         localStorage.getItem("realnameStatus") != null
       ) {
-        this.$router.push({name: "faceRecognitionDetail"});//实名认证
-
-        // this.$toast({ message: "请去APP实名后登录", position: "bottom" });
-        // let did = localStorage.getItem("did");
-        // localStorage.clear();
-        // sessionStorage.clear();
-        // Cookies.remove('token');
-
-        // if (did) {
-        //   localStorage.setItem("did", did);
-        // }
-        
-        // this.$router.push({ name: "login" });
+        this.$router.push({ name: "faceRecognitionDetail" }); //实名认证
       } else {
         this._getUserMessage();
       }
@@ -303,33 +292,29 @@ export default {
       getBrandNews(this.token, 20).then((res) => {
         if (res.resp_code == "000000") {
           this.newsList = res.result.content;
-        
 
           if (res.result.content.length != 0) {
-
-
-
             var endTime = this.dateToTimestamp(res.result.content[0].endTime);
             var currentTime = Date.parse(new Date());
 
-            var isshow;var valueId;
+            var isshow;
+            var valueId;
             if (localStorage.getItem("kd_l_isshow")) {
-              isshow  = localStorage.getItem("kd_l_isshow").split('||')[0];
-              valueId = localStorage.getItem("kd_l_isshow").split('||')[1];
+              isshow = localStorage.getItem("kd_l_isshow").split("||")[0];
+              valueId = localStorage.getItem("kd_l_isshow").split("||")[1];
             }
             if (isshow == 1 && valueId == res.result.content[0].id) {
-            
-            } else{
-                  this.$dialog
-                  .alert({
-                    title: res.result.content[0].title,
-                    message: res.result.content[0].content,
-                    theme: "round-button",
-                  })
-                  .then(() => {
-                    var value = '1||'+res.result.content[0].id;
-                     localStorage.setItem("kd_l_isshow", value);
-                  });
+            } else {
+              this.$dialog
+                .alert({
+                  title: res.result.content[0].title,
+                  message: res.result.content[0].content,
+                  theme: "round-button",
+                })
+                .then(() => {
+                  var value = "1||" + res.result.content[0].id;
+                  localStorage.setItem("kd_l_isshow", value);
+                });
             }
           }
         }
@@ -347,27 +332,20 @@ export default {
     cardApply() {
       this.$router.push("/card/apply");
     },
-    link1(){
-          
-
-
-
-          this.$router.push({
-            name: "appLink",
-            params: {
-              url: JSON.stringify('https://mp.weixin.qq.com/s/zxjORAQFlk0X4R9Y0n_-qw'),
-              title: JSON.stringify("关于卡德世界收购公告"),
-              type: "0",
-
-            },
-          });
-
-
-
-
+    link1() {
+      this.$router.push({
+        name: "appLink",
+        params: {
+          url: JSON.stringify(
+            "https://mp.weixin.qq.com/s/zxjORAQFlk0X4R9Y0n_-qw"
+          ),
+          title: JSON.stringify("关于卡德世界收购公告"),
+          type: "0",
+        },
+      });
     },
     link(item) {
-      debugger
+      debugger;
       let num = 0;
       var ua = window.navigator.userAgent.toLowerCase();
       this.fuwuList.map((key) => {
@@ -414,21 +392,29 @@ export default {
       }
     },
     next(path, type) {
-      if (type == 8) {
-        this.$router.push({ path: path });
-      } else if (type == 1) {
-        this.$router.push({
-          path: path,
-          query: {
-            phone: this.phone,
-            token: this.token,
-            brandId: this.global.brandId,
-            userId: this.userId,
-            ip: this.global.ip,
-            type: "h5",
-            deviceId: localStorage.getItem("did"),
-          },
-        });
+      // 判断存储在本地的实名状态如果已实名开始判断认证状态
+      if (
+        localStorage.getItem("realnameStatus") != 1 &&
+        localStorage.getItem("realnameStatus") != null
+      ) {
+        this.$router.push({ name: "faceRecognitionDetail" }); //实名认证
+      } else {
+        if (type == 8) {
+          this.$router.push({ path: path });
+        } else if (type == 1) {
+          this.$router.push({
+            path: path,
+            query: {
+              phone: this.phone,
+              token: this.token,
+              brandId: this.global.brandId,
+              userId: this.userId,
+              ip: this.global.ip,
+              type: "h5",
+              deviceId: localStorage.getItem("did"),
+            },
+          });
+        }
       }
     },
     // 获取轮播图
