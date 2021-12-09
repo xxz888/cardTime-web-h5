@@ -100,7 +100,7 @@ export default {
       phone: localStorage.getItem("phone"),
       isLoading: false,
       fuwuList: [],
-      balance: 0,
+      balance: '',
       monthRebate: '',
       todayRebate: '',
       userAvatar: "",
@@ -470,13 +470,13 @@ export default {
   opacity: 0.6;
 }
 .allRebateH3 {
-  margin-top: 25px;
   font-size: 40px;
   font-family: DIN;
   font-weight: bold;
-  line-height: 21px;
+  line-height: 80px;
   color: #f8fafb;
   opacity: 1;
+  height: 80px;
 }
 .right_border {
   /* width: 40%; */

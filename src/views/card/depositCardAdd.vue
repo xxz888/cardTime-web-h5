@@ -17,7 +17,7 @@
           <van-field v-if="userList.realnameStatus!=1" v-model="realname" label="账户姓名" readonly="readonly"/>
           <van-field v-model="item.cardNo" type="digit" label="银行卡号" placeholder="请输入银行卡号" clearable minlength="10"
                      required/>
-          <div class="card_no_tips">请核对卡号信息是否正确，若有误，请手动修改</div>
+          <!-- <div class="card_no_tips">请核对卡号信息是否正确，若有误，请手动修改</div> -->
           <van-field readonly="readonly" is-link v-model="address" placeholder="请选择开户行所在省市" @click="showPicker2 = true"
                      label="开户省市"/>
           <van-field v-model="item.phone" label="手机号" type="digit" placeholder="请输入银行卡预留手机号" clearable maxlength="11"
@@ -267,5 +267,7 @@ export default {
   color: #2574EA;
   padding: 0 15px;
 }
-
+/deep/ .van-field__label{
+  margin-right:0
+}
 </style>
