@@ -141,15 +141,16 @@ export default {
     getCode() {
 
       authPhone(this.phone).then(res => {
+        
         if (res.resp_message.indexOf('未注册') > -1) {
-          this.$toast({message: res.resp_message, position: "bottom"});
-        } else if (res.resp_message.indexOf('已注册') > -1) {
-          smsSend(this.brandId, this.phone).then((res) => {
+              smsSend(this.brandId, this.phone).then((res) => {
             if (res.resp_code == "000000") {
               this.time();
               this.$toast({message: res.resp_message, position: "bottom"});
             }
           })
+        } else if (res.resp_message.indexOf('已注册') > -1) {
+               this.$toast({message: res.resp_message, position: "bottom"});
         }
       })
     },
@@ -164,11 +165,11 @@ export default {
         return;
       }
       //
-      if (this.publicJs.isPhoneNumber(this.preUserPhone)) {
-        this.$toast({message: "推荐人手机号码有误,请重填", position: "bottom"});
-        return;
-      }
-      register(this.brandId, this.phone, this.smsCode, this.preUserPhone, this.regPwd).then(res => {
+      // if (this.publicJs.isPhoneNumber(this.preUserPhone)) {
+      //   this.$toast({message: "推荐人手机号码有误,请重填", position: "bottom"});
+      //   return;
+      // }
+      register(this.brandId, this.phone, this.smsCode, "", this.regPwd).then(res => {
         if (res.resp_code == "000000") {
           this.active = false
           this.password = this.regPwd

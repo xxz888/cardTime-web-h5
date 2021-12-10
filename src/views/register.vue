@@ -104,6 +104,7 @@ export default {
     getCode() {
       if (this.phone.trim().length == 11) {
         authPhone(this.phone).then(res => {
+          debugger
           if (res.resp_message.indexOf('已注册') > -1) {
             this.$router.push({name: 'login'})
             this.$toast({message: res.resp_message, position: "bottom"});
